@@ -2,7 +2,7 @@ import React from 'react';
 
 interface MetroSathiLogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'full' | 'icon-only' | 'light';
+  variant?: 'full' | 'icon-only' | 'light' | 'dark';
   className?: string;
   style?: React.CSSProperties;
 }
@@ -15,15 +15,17 @@ export default function MetroSathiLogo({
 }: MetroSathiLogoProps) {
   // Dimensions map
   const dimensions = {
-    sm: { height: 32, iconSize: 28, fontSize: '1.1rem', badgeSize: '0.65rem' },
-    md: { height: 42, iconSize: 36, fontSize: '1.4rem', badgeSize: '0.72rem' },
-    lg: { height: 56, iconSize: 48, fontSize: '1.8rem', badgeSize: '0.8rem' },
-    xl: { height: 80, iconSize: 72, fontSize: '2.5rem', badgeSize: '0.95rem' },
+    sm: { height: 32, iconSize: 30, fontSize: '1.2rem', badgeSize: '0.62rem' },
+    md: { height: 44, iconSize: 38, fontSize: '1.45rem', badgeSize: '0.7rem' },
+    lg: { height: 56, iconSize: 48, fontSize: '1.85rem', badgeSize: '0.8rem' },
+    xl: { height: 80, iconSize: 64, fontSize: '2.5rem', badgeSize: '0.95rem' },
   }[size];
 
-  const textColor = variant === 'light' ? '#FFFFFF' : '#0B1F3A';
-  const accentColor = '#0057B8';
-  const redColor = '#E53935';
+  // Color selection: variant 'light' is used on Dark Navy background (Header)
+  const isLightOnDark = variant === 'light';
+  const metroColor = isLightOnDark ? '#38BDF8' : '#0057B8'; // Sky Blue on Dark Navy, Deep Blue on light
+  const sathiColor = isLightOnDark ? '#FFFFFF' : '#E53935'; // Pure White on Dark Navy, Metro Red on light
+  const subtextColor = isLightOnDark ? 'rgba(255,255,255,0.85)' : '#64748B';
 
   return (
     <div
@@ -70,17 +72,17 @@ export default function MetroSathiLogo({
       {variant !== 'icon-only' && (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', lineHeight: 1.1 }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span style={{ fontWeight: 900, fontSize: dimensions.fontSize, color: accentColor, letterSpacing: '-0.02em' }}>
+            <span style={{ fontWeight: 900, fontSize: dimensions.fontSize, color: metroColor, letterSpacing: '-0.02em' }}>
               Metro
             </span>
-            <span style={{ fontWeight: 800, fontSize: dimensions.fontSize, color: textColor, letterSpacing: '-0.01em' }}>
+            <span style={{ fontWeight: 800, fontSize: dimensions.fontSize, color: sathiColor, letterSpacing: '-0.01em', marginLeft: '1px' }}>
               Sathi
             </span>
             <span
               style={{
-                width: '8px',
-                height: '8px',
-                backgroundColor: redColor,
+                width: '7px',
+                height: '7px',
+                backgroundColor: '#E53935',
                 borderRadius: '50%',
                 display: 'inline-block',
                 marginLeft: '3px',
@@ -93,12 +95,12 @@ export default function MetroSathiLogo({
               fontSize: dimensions.badgeSize,
               fontWeight: 700,
               letterSpacing: '0.12em',
-              color: variant === 'light' ? 'rgba(255,255,255,0.7)' : '#64748B',
+              color: subtextColor,
               textTransform: 'uppercase',
               marginTop: '1px',
             }}
           >
-            AI Metro Navigation
+            AI METRO NAVIGATION
           </span>
         </div>
       )}

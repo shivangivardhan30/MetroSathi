@@ -361,6 +361,12 @@ export default function RouteDetails({ route, language, isLoading }: RouteDetail
           sourceCity={cityName}
           sourceStationName={route.stops[0].stationName}
           destinationStationName={route.stops[route.stops.length - 1].stationName}
+          sourceNetwork={sourceStation?.network || route.stops[0].network}
+          destNetwork={destStation?.network || route.stops[route.stops.length - 1].network}
+          sourceLine={route.stops[0].line}
+          destLine={route.stops[route.stops.length - 1].line}
+          interchanges={route.interchanges}
+          estimatedTime={route.estimatedTime}
           fare={route.totalFare}
           onClose={() => setShowBooking(false)}
           language={language}

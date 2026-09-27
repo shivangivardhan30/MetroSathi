@@ -6,6 +6,8 @@ import { LanguageProvider } from '../lib/languageContext';
 import Layout from '../components/Layout';
 import { validateMetroData } from '../lib/validateMetroData';
 
+import Head from 'next/head';
+
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') {
@@ -14,12 +16,19 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <AuthProvider>
-      <LanguageProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </LanguageProvider>
-    </AuthProvider>
+    <>
+      <Head>
+        <title>MetroSathi | AI Metro Navigation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="MetroSathi - India's AI-Powered Multi-City Metro Journey Navigation System" />
+      </Head>
+      <AuthProvider>
+        <LanguageProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </LanguageProvider>
+      </AuthProvider>
+    </>
   );
 }
