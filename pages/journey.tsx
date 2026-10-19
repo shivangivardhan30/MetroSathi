@@ -147,9 +147,31 @@ export default function Journey() {
           label={language === 'en' ? '🎯 Destination Station' : '🎯 गंतव्य स्टेशन'}
         />
 
-        <button className="button" onClick={handleShowRoute} style={{ marginTop: '8px', width: '100%' }}>
-          {t.journey.showRoute}
-        </button>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '8px' }}>
+          <button className="button" onClick={handleShowRoute} style={{ width: '100%' }}>
+            🔍 {t.journey.showRoute}
+          </button>
+          <button
+            type="button"
+            className="button"
+            onClick={() => {
+              if (sourceStation && destinationStation) {
+                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}&dest=${encodeURIComponent(destinationStation)}`);
+              } else if (sourceStation) {
+                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}`);
+              } else {
+                router.push('/tickets');
+              }
+            }}
+            style={{
+              width: '100%',
+              background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
+              borderColor: '#059669',
+            }}
+          >
+            🎫 {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+          </button>
+        </div>
       </section>
 
       {/* 3. Visual Step Flow Banner */}

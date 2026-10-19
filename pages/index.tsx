@@ -93,7 +93,7 @@ export default function Home() {
       icon: '🎫',
       title: language === 'en' ? 'Digital Ticket Booking' : 'डिजिटल टिकट बुकिंग',
       desc: language === 'en' ? 'Book metro tickets instantly with dynamic QR codes.' : 'गतिशील क्यूआर कोड के साथ तुरंत मेट्रो टिकट बुक करें।',
-      link: '/journey',
+      link: '/tickets',
     },
   ];
 
@@ -110,9 +110,19 @@ export default function Home() {
             {t.home.subtitle}
           </p>
 
-          <div className="hero-cta-group">
+          <div className="hero-cta-group" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <Link href="/journey" className="button">
               <span>🔍</span> {t.home.planJourneyBtn}
+            </Link>
+            <Link
+              href="/tickets"
+              className="button"
+              style={{
+                background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
+                borderColor: '#059669',
+              }}
+            >
+              <span>🎫</span> {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
             </Link>
             <Link href="/map" className="btn-secondary">
               <span>🗺️</span> {language === 'en' ? 'Explore Metro Maps' : 'मानचित्र देखें'}
@@ -207,13 +217,37 @@ export default function Home() {
           />
         </div>
 
-        <button
-          className="button"
-          onClick={handleFindRoute}
-          style={{ width: '100%', padding: '14px', fontSize: '1.05rem', fontWeight: 800 }}
-        >
-          🔍 {t.home.planJourneyBtn}
-        </button>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+          <button
+            className="button"
+            onClick={handleFindRoute}
+            style={{ width: '100%', padding: '14px', fontSize: '1.05rem', fontWeight: 800 }}
+          >
+            🔍 {t.home.planJourneyBtn}
+          </button>
+          <button
+            className="button"
+            onClick={() => {
+              if (sourceStation && destinationStation) {
+                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}&dest=${encodeURIComponent(destinationStation)}`);
+              } else if (sourceStation) {
+                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}`);
+              } else {
+                router.push('/tickets');
+              }
+            }}
+            style={{
+              width: '100%',
+              padding: '14px',
+              fontSize: '1.05rem',
+              fontWeight: 800,
+              background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
+              borderColor: '#059669',
+            }}
+          >
+            🎫 {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+          </button>
+        </div>
       </section>
 
       {/* Feature Grid */}

@@ -5,7 +5,7 @@ import { useLanguage } from '../lib/languageContext';
 import { useTranslation } from '../lib/translations';
 import { useAuth } from '../lib/authContext';
 import MetroSathiLogo from './MetroSathiLogo';
-import { HomeIcon, JourneyIcon, MapIcon, AssistantIcon, ProfileIcon } from './NavIcons';
+import { HomeIcon, JourneyIcon, MapIcon, AssistantIcon, TicketIcon, ProfileIcon } from './NavIcons';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -20,6 +20,7 @@ export default function Layout({ children }: LayoutProps) {
   const navItems = [
     { href: '/', label: language === 'en' ? 'Home' : 'मुख्य', icon: <HomeIcon size={18} /> },
     { href: '/journey', label: language === 'en' ? 'Plan Journey' : 'यात्रा योजनाकार', icon: <JourneyIcon size={18} /> },
+    { href: '/tickets', label: language === 'en' ? 'Tickets' : 'टिकट', icon: <TicketIcon size={18} /> },
     { href: '/map', label: language === 'en' ? 'Metro Networks' : 'मेट्रो नेटवर्क', icon: <MapIcon size={18} /> },
     { href: '/assistant', label: language === 'en' ? 'AI Assistant' : 'AI सहायक', icon: <AssistantIcon size={18} /> },
   ];

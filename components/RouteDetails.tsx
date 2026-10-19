@@ -138,7 +138,14 @@ export default function RouteDetails({ route, language, isLoading }: RouteDetail
         <button
           onClick={() => setShowBooking(true)}
           className="btn-primary"
-          style={{ flex: 1, minWidth: '160px' }}
+          style={{
+            flex: 1,
+            minWidth: '160px',
+            background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
+            borderColor: '#059669',
+            fontSize: '1rem',
+            fontWeight: 800,
+          }}
         >
           {t.booking.bookTicketBtn}
         </button>

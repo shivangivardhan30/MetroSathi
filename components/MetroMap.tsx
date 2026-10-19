@@ -581,14 +581,32 @@ export default function MetroMap({ language }: MetroMapProps) {
             </div>
           </div>
 
-          <button
-            type="button"
-            className="btn-primary"
-            onClick={() => router.push(`/journey?src=${sourceStationId}&dest=${destStationId}`)}
-            style={{ padding: '10px 18px', fontSize: '0.88rem' }}
-          >
-            {language === 'en' ? 'Open Full Journey Plan ➔' : 'पूर्ण यात्रा विवरण देखें ➔'}
-          </button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              className="btn-primary"
+              onClick={() => router.push(`/tickets?src=${sourceStationId}&dest=${destStationId}`)}
+              style={{
+                padding: '10px 18px',
+                fontSize: '0.88rem',
+                background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
+                borderColor: '#059669',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <span>🎫</span> {language === 'en' ? `Buy Ticket (₹${activeRoute.totalFare})` : `टिकट खरीदें (₹${activeRoute.totalFare})`}
+            </button>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => router.push(`/journey?src=${sourceStationId}&dest=${destStationId}`)}
+              style={{ padding: '10px 18px', fontSize: '0.88rem', backgroundColor: '#FFFFFF', color: 'var(--metro-navy)' }}
+            >
+              {language === 'en' ? 'Journey Breakdown ➔' : 'यात्रा विवरण ➔'}
+            </button>
+          </div>
         </div>
       )}
 
@@ -1035,14 +1053,42 @@ export default function MetroMap({ language }: MetroMapProps) {
             >
               🎯 {language === 'en' ? 'Set as Destination' : 'गंतव्य स्टेशन बनाएं'}
             </button>
-            {sourceStationId && destStationId && (
+            {sourceStationId && destStationId ? (
+              <>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => router.push(`/tickets?src=${sourceStationId}&dest=${destStationId}`)}
+                  style={{
+                    flex: 1,
+                    minWidth: '160px',
+                    background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
+                    borderColor: '#059669',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  🎫 {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+                </button>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => router.push(`/journey?src=${sourceStationId}&dest=${destStationId}`)}
+                  style={{ flex: 1, minWidth: '160px' }}
+                >
+                  {language === 'en' ? 'Journey Planner ➔' : 'यात्रा योजनाकार ➔'}
+                </button>
+              </>
+            ) : (
               <button
                 type="button"
-                className="btn-primary"
-                onClick={() => router.push(`/journey?src=${sourceStationId}&dest=${destStationId}`)}
-                style={{ flex: 1, minWidth: '180px' }}
+                className="btn-outline"
+                onClick={() => router.push(`/tickets?src=${selectedStation.id}`)}
+                style={{ flex: 1, minWidth: '160px', color: '#059669', borderColor: '#059669' }}
               >
-                {language === 'en' ? 'Go to Journey Planner ➔' : 'यात्रा योजनाकार पर जाएं ➔'}
+                🎫 {language === 'en' ? 'Buy Ticket From Here' : 'यहाँ से टिकट खरीदें'}
               </button>
             )}
           </div>

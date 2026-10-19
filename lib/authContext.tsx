@@ -149,18 +149,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const bookTicket = (ticket: Omit<BookedTicket, 'id' | 'timestamp'>) => {
-    if (!user) return;
-
     const newTicket: BookedTicket = {
       ...ticket,
       id: `ticket_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
       timestamp: Date.now(),
     };
 
-    const bookedTickets = [newTicket, ...(user.bookedTickets || [])];
+    let currentUser = user;
+    if (!currentUser) {
+      currentUser = {
+        id: `guest_${Date.now()}`,
+        name: 'Guest Traveler',
+        favorites: [],
+        recentJourneys: [],
+        bookedTickets: [],
+      };
+    }
+
+    const bookedTickets = [newTicket, ...(currentUser.bookedTickets || [])];
 
     const updatedUser: User = {
-      ...user,
+      ...currentUser,
       bookedTickets,
     };
 
