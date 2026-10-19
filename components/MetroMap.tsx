@@ -8,197 +8,259 @@ interface MetroMapProps {
   language: 'en' | 'hi';
 }
 
-// Schematic 0°, 45°, 90° Layout Coordinates for All Stations
+// -------------------------------------------------------------
+// PRECISE SCHEMATIC TRANSIT COORDINATES (0°, 45°, 90°)
+// Cleanly spaced, zero random fallback, geometrically aligned
+// -------------------------------------------------------------
 const schematicCoordinates: Record<string, { x: number; y: number }> = {
-  // RED LINE
-  'DLI_RED_RITHALA': { x: 80, y: 200 },
-  'DLI_RED_ROHINI_W': { x: 130, y: 200 },
-  'DLI_RED_ROHINI_E': { x: 180, y: 200 },
-  'DLI_RED_PITAMPURA': { x: 230, y: 200 },
-  'DLI_RED_KOHAT': { x: 280, y: 200 },
-  'DLI_INTER_NSP': { x: 330, y: 200 }, // NSP (Interchange Pink)
-  'DLI_RED_KESHAV': { x: 380, y: 200 },
-  'DLI_INTER_INDERLOK': { x: 430, y: 200 }, // Inderlok (Interchange Green)
-  'DLI_RED_SHASTRI': { x: 470, y: 200 },
-  'DLI_RED_PRATAP': { x: 510, y: 200 },
-  'DLI_RED_TIS_HAZARI': { x: 550, y: 200 },
-  'DLI_INTER_KASHMERE': { x: 600, y: 200 }, // Kashmere Gate (Interchange Yellow, Violet)
-  'DLI_RED_SHASTRI_PARK': { x: 660, y: 200 },
-  'DLI_RED_SEELAMPUR': { x: 720, y: 200 },
-  'DLI_INTER_WELCOME': { x: 780, y: 200 }, // Welcome (Interchange Pink)
-  'DLI_RED_SHAHDARA': { x: 840, y: 200 },
-  'DLI_RED_MANSAROVAR': { x: 900, y: 200 },
-  'DLI_RED_JHILMIL': { x: 960, y: 200 },
-  'DLI_RED_DILSHAD': { x: 1020, y: 200 },
-  'DLI_RED_SHAHEED_NAGAR': { x: 1080, y: 200 },
-  'DLI_RED_RAJ_BAGH': { x: 1140, y: 200 },
-  'DLI_RED_MOHIT': { x: 1200, y: 200 },
-  'DLI_RED_SHAHEED': { x: 1260, y: 200 },
+  // === YELLOW LINE (Vertical central spine x = 650) ===
+  'DLI_YEL_ROHINI18': { x: 650, y: 70 },
+  'DLI_YEL_ADARSH': { x: 650, y: 120 },
+  'DLI_INTER_AZADPUR': { x: 650, y: 170 }, // Interchange Pink
+  'DLI_YEL_VISHWA': { x: 650, y: 220 },
+  'DLI_INTER_KASHMERE': { x: 650, y: 280 }, // Interchange Red & Violet
+  'DLI_YEL_CHANDNI': { x: 650, y: 345 },
+  'DLI_YEL_CHAWRI': { x: 650, y: 410 },
+  'DLI_INTER_RAJIV': { x: 650, y: 480 }, // Rajiv Chowk (Central Hub: Blue, Yellow, Airport)
+  'DLI_YEL_PATEL': { x: 650, y: 545 },
+  'DLI_INTER_CENTRAL': { x: 650, y: 610 }, // Interchange Violet
+  'DLI_INTER_INA': { x: 650, y: 675 }, // Interchange Pink
+  'DLI_YEL_AIIMS': { x: 650, y: 735 },
+  'DLI_INTER_HAUZ_KHAS': { x: 650, y: 795 }, // Interchange Magenta
+  'DLI_YEL_SAKET': { x: 650, y: 855 },
+  'DLI_YEL_QUTAB': { x: 650, y: 915 },
+  'DLI_YEL_CHHATTARPUR': { x: 650, y: 975 },
+  'DLI_YEL_ARJAN': { x: 650, y: 1035 },
+  'DLI_INTER_SIKANDARPUR': { x: 650, y: 1095 }, // Interchange Rapid Metro
+  'DLI_YEL_HUDA': { x: 650, y: 1155 }, // Millennium City Centre Gurugram
 
-  // YELLOW LINE
-  'DLI_YEL_SAMAYPUR': { x: 600, y: 60 },
-  'DLI_YEL_ROHINI18': { x: 600, y: 100 },
-  'DLI_YEL_HAIDERPUR': { x: 600, y: 130 },
-  'DLI_YEL_JAHANGIRPURI': { x: 600, y: 155 },
-  'DLI_YEL_ADARSH': { x: 600, y: 175 },
-  'DLI_INTER_AZADPUR': { x: 600, y: 185 },
-  'DLI_YEL_MODEL_TOWN': { x: 600, y: 192 },
-  'DLI_YEL_VISHWA': { x: 600, y: 196 },
-  'DLI_YEL_GTB': { x: 600, y: 198 },
-  'DLI_YEL_VISHWAVIDYALAYA': { x: 600, y: 199 },
-  'DLI_YEL_CIVIL_LINES': { x: 600, y: 200 },
-  'DLI_YEL_CHANDNI': { x: 600, y: 260 },
-  'DLI_YEL_CHAWRI': { x: 600, y: 300 },
-  'DLI_INTER_NEW_DELHI': { x: 600, y: 340 },
-  'DLI_INTER_RAJIV_CHOWK': { x: 600, y: 400 }, // Rajiv Chowk (Interchange Blue)
-  'DLI_YEL_PATEL': { x: 600, y: 440 },
-  'DLI_INTER_CENTRAL_SEC': { x: 600, y: 480 }, // Central Secretariat (Interchange Violet)
-  'DLI_YEL_UDYOG': { x: 600, y: 520 },
-  'DLI_YEL_LOK_KALYAN': { x: 600, y: 550 },
-  'DLI_YEL_JOR_BAGH': { x: 600, y: 580 },
-  'DLI_INTER_INA': { x: 600, y: 620 }, // INA (Interchange Pink)
-  'DLI_YEL_AIIMS': { x: 600, y: 660 },
-  'DLI_YEL_GREEN_PARK': { x: 600, y: 700 },
-  'DLI_INTER_HAUZ_KHAS': { x: 600, y: 740 }, // Hauz Khas (Interchange Magenta)
-  'DLI_YEL_MALVIYA': { x: 600, y: 780 },
-  'DLI_YEL_SAKET': { x: 600, y: 820 },
-  'DLI_YEL_QUTAB': { x: 600, y: 860 },
-  'DLI_YEL_CHHATARPUR': { x: 600, y: 900 },
-  'DLI_YEL_SULTANPUR': { x: 600, y: 940 },
-  'DLI_YEL_GHITORNI': { x: 600, y: 980 },
-  'DLI_YEL_ARJAN': { x: 600, y: 1020 },
-  'DLI_YEL_GURU_DRON': { x: 600, y: 1060 },
-  'DLI_YEL_SIKANDERPUR': { x: 600, y: 1100 },
-  'DLI_YEL_MG_ROAD': { x: 600, y: 1140 },
-  'DLI_YEL_IFFCO': { x: 600, y: 1180 },
-  'DLI_YEL_MILLENNIUM': { x: 600, y: 1220 },
+  // === RED LINE (Horizontal northern corridor y = 280) ===
+  'DLI_RED_PITAMPURA': { x: 120, y: 280 },
+  'DLI_RED_KOHAT': { x: 180, y: 280 },
+  'DLI_INTER_NSP': { x: 240, y: 280 }, // Netaji Subhash Place (Interchange Pink)
+  'DLI_RED_KESHAV': { x: 310, y: 280 },
+  'DLI_INTER_INDERLOK': { x: 380, y: 280 }, // Inderlok (Interchange Green)
+  'DLI_RED_SHASTRI': { x: 450, y: 280 },
+  'DLI_RED_PRATAP': { x: 520, y: 280 },
+  'DLI_RED_TIS_HAZARI': { x: 585, y: 280 },
+  // Kashmere Gate at (650, 280)
+  'DLI_INTER_WELCOME': { x: 780, y: 280 }, // Welcome (Interchange Pink)
+  'DLI_RED_JHILMIL': { x: 850, y: 280 },
+  'DLI_RED_MANSAROVAR': { x: 920, y: 280 },
+  'DLI_RED_RAJ_BAGH': { x: 990, y: 280 },
+  'DLI_RED_MOHIT': { x: 1060, y: 280 },
+  'DLI_RED_SHAHEED': { x: 1130, y: 280 },
 
-  // BLUE LINE
-  'DLI_BLU_DWARKA21': { x: 80, y: 400 },
-  'DLI_BLU_DWARKA8': { x: 120, y: 400 },
-  'DLI_BLU_DWARKA9': { x: 160, y: 400 },
-  'DLI_BLU_DWARKA10': { x: 200, y: 400 },
-  'DLI_BLU_DWARKA11': { x: 240, y: 400 },
-  'DLI_BLU_DWARKA12': { x: 280, y: 400 },
-  'DLI_BLU_DWARKA13': { x: 320, y: 400 },
-  'DLI_BLU_DWARKA14': { x: 360, y: 400 },
-  'DLI_BLU_DWARKA': { x: 400, y: 400 },
-  'DLI_INTER_JANAKPURI_W': { x: 440, y: 400 }, // Janakpuri W (Interchange Magenta)
-  'DLI_BLU_UTTAM_W': { x: 470, y: 400 },
-  'DLI_BLU_UTTAM_E': { x: 500, y: 400 },
-  'DLI_BLU_TILAK': { x: 530, y: 400 },
-  'DLI_BLU_SUBHASH': { x: 560, y: 400 },
-  'DLI_INTER_RAMAKRISHNA': { x: 580, y: 400 },
-  'DLI_BLU_SHIVAJI': { x: 590, y: 400 },
-  'DLI_INTER_MANDI_HOUSE': { x: 680, y: 400 }, // Mandi House (Interchange Violet)
-  'DLI_BLU_SUPREME': { x: 730, y: 400 },
-  'DLI_BLU_INDRAPRASTHA': { x: 780, y: 400 },
-  'DLI_INTER_YAMUNA_BANK': { x: 830, y: 400 },
-  'DLI_BLU_AKSHARDHAM': { x: 880, y: 400 },
-  'DLI_INTER_MAYUR_VIHAR1': { x: 930, y: 400 }, // Mayur Vihar-1 (Interchange Pink)
-  'DLI_BLU_MAYUR_EXT': { x: 970, y: 400 },
-  'DLI_BLU_NEW_ASHOK': { x: 1010, y: 400 },
-  'DLI_BLU_NOIDA15': { x: 1050, y: 400 },
-  'DLI_BLU_NOIDA16': { x: 1090, y: 400 },
-  'DLI_BLU_NOIDA18': { x: 1130, y: 400 },
-  'DLI_INTER_BOTANICAL': { x: 1170, y: 400 }, // Botanical Garden (Interchange Magenta)
-  'DLI_BLU_GOLF': { x: 1210, y: 400 },
-  'DLI_BLU_NOIDA_CC': { x: 1250, y: 400 },
-  'DLI_BLU_NOIDA34': { x: 1290, y: 400 },
-  'DLI_INTER_NOIDA52': { x: 1330, y: 400 }, // Sec 52 (Interchange Aqua Sec 51)
-  'DLI_BLU_NOIDA61': { x: 1370, y: 400 },
-  'DLI_BLU_NOIDA59': { x: 1410, y: 400 },
-  'DLI_BLU_NOIDA62': { x: 1450, y: 400 },
-  'DLI_BLU_NOIDA_E_CITY': { x: 1490, y: 400 },
+  // === BLUE LINE (East-West mainline through Rajiv Chowk to Noida) ===
+  'DLI_INTER_DWARKA21': { x: 50, y: 480 }, // Dwarka Sec 21 (Interchange Airport)
+  'DLI_BLU_DWARKA8': { x: 90, y: 480 },
+  'DLI_BLU_DWARKA9': { x: 130, y: 480 },
+  'DLI_BLU_DWARKA14': { x: 170, y: 480 },
+  'DLI_BLU_DWARKAMOR': { x: 210, y: 480 },
+  'DLI_BLU_UTTAM': { x: 250, y: 480 },
+  'DLI_INTER_JANAKPURI': { x: 300, y: 480 }, // Janakpuri West (Interchange Magenta)
+  'DLI_INTER_RAJOURI': { x: 365, y: 480 }, // Rajouri Garden (Interchange Pink)
+  'DLI_BLU_SUBHASH': { x: 415, y: 480 },
+  'DLI_BLU_MOTINAGAR': { x: 465, y: 480 },
+  'DLI_INTER_KIRTINAGAR': { x: 515, y: 480 }, // Kirti Nagar (Interchange Green)
+  'DLI_BLU_RAJENDRA': { x: 555, y: 480 },
+  'DLI_BLU_JHANDEWALAN': { x: 585, y: 480 },
+  'DLI_BLU_RKASHRAM': { x: 615, y: 480 },
+  // Rajiv Chowk at (650, 480)
+  'DLI_BLU_BARAKHAMBA': { x: 710, y: 480 },
+  'DLI_INTER_MANDIHOUSE': { x: 770, y: 480 }, // Mandi House (Interchange Violet)
+  'DLI_INTER_MAYUR1': { x: 860, y: 520 }, // Mayur Vihar-1 (Interchange Pink)
+  'DLI_BLU_MAYUREXT': { x: 910, y: 535 },
+  'DLI_BLU_NEWASHOK': { x: 955, y: 545 },
+  'DLI_BLU_NOIDA15': { x: 1000, y: 555 },
+  'DLI_BLU_NOIDA16': { x: 1045, y: 565 },
+  'DLI_BLU_NOIDA18': { x: 1090, y: 575 },
+  'DLI_INTER_BOTANICAL': { x: 1140, y: 585 }, // Botanical Garden (Interchange Magenta)
+  'DLI_BLU_GOLFCOURSE': { x: 1190, y: 585 },
+  'DLI_BLU_NOIDACITY': { x: 1240, y: 585 },
+  'DLI_BLU_NOIDA34': { x: 1290, y: 585 },
+  'DLI_INTER_NOIDA52': { x: 1340, y: 585 }, // Noida Sec 52 (Transfer to Aqua Line)
+  'DLI_BLU_NOIDA61': { x: 1395, y: 585 },
+  'DLI_BLU_NOIDA59': { x: 1445, y: 585 },
+  'DLI_BLU_NOIDA62': { x: 1495, y: 585 },
 
-  // NOIDA METRO AQUA LINE
-  'NMRC_AQ_N51': { x: 1330, y: 470 }, // Sec 51 (Walking Transfer DMRC Sec 52)
-  'NMRC_AQ_N50': { x: 1330, y: 510 },
-  'NMRC_AQ_N76': { x: 1330, y: 550 },
-  'NMRC_AQ_N101': { x: 1330, y: 590 },
-  'NMRC_AQ_N81': { x: 1330, y: 630 },
-  'NMRC_AQ_NSEZ': { x: 1330, y: 670 },
-  'NMRC_AQ_N83': { x: 1330, y: 710 },
-  'NMRC_AQ_N137': { x: 1330, y: 750 },
-  'NMRC_AQ_N142': { x: 1330, y: 790 },
-  'NMRC_AQ_N143': { x: 1330, y: 830 },
-  'NMRC_AQ_N144': { x: 1330, y: 870 },
-  'NMRC_AQ_N145': { x: 1330, y: 910 },
-  'NMRC_AQ_N146': { x: 1330, y: 950 },
-  'NMRC_AQ_N147': { x: 1330, y: 990 },
-  'NMRC_AQ_N148': { x: 1330, y: 1030 },
-  'NMRC_AQ_KP2': { x: 1330, y: 1070 },
-  'NMRC_AQ_PARI': { x: 1330, y: 1110 },
-  'NMRC_AQ_ALPHA1': { x: 1330, y: 1150 },
-  'NMRC_AQ_DELTA1': { x: 1330, y: 1190 },
-  'NMRC_AQ_GNIDA': { x: 1330, y: 1230 },
-  'NMRC_AQ_DEPOT': { x: 1330, y: 1270 },
+  // === NOIDA METRO AQUA LINE (NMRC) ===
+  'NMRC_AQ_N51': { x: 1340, y: 640 }, // Sec 51 (Walking Transfer to DMRC Sec 52)
+  'NMRC_AQ_N50': { x: 1340, y: 675 },
+  'NMRC_AQ_N76': { x: 1340, y: 705 },
+  'NMRC_AQ_N101': { x: 1340, y: 735 },
+  'NMRC_AQ_N81': { x: 1340, y: 765 },
+  'NMRC_AQ_NSEZ': { x: 1340, y: 795 },
+  'NMRC_AQ_N83': { x: 1340, y: 825 },
+  'NMRC_AQ_N137': { x: 1340, y: 855 },
+  'NMRC_AQ_N142': { x: 1340, y: 885 },
+  'NMRC_AQ_N143': { x: 1340, y: 915 },
+  'NMRC_AQ_N144': { x: 1340, y: 945 },
+  'NMRC_AQ_N145': { x: 1340, y: 975 },
+  'NMRC_AQ_N146': { x: 1340, y: 1005 },
+  'NMRC_AQ_N147': { x: 1340, y: 1035 },
+  'NMRC_AQ_N148': { x: 1340, y: 1065 },
+  'NMRC_AQ_KP2': { x: 1340, y: 1095 },
+  'NMRC_AQ_PARICHOWK': { x: 1340, y: 1125 }, // Pari Chowk
+  'NMRC_AQ_ALPHA1': { x: 1340, y: 1155 },
+  'NMRC_AQ_DELTA1': { x: 1340, y: 1185 },
+  'NMRC_AQ_GNIDA': { x: 1340, y: 1215 },
+  'NMRC_AQ_DEPOT': { x: 1340, y: 1245 },
 
-  // PINK LINE
-  'DLI_INTER_LAJPAT': { x: 760, y: 620 }, // Lajpat Nagar (Interchange Violet)
-  'DLI_PNK_HAZRAT': { x: 830, y: 560 },
-  'DLI_PNK_ASHRAM': { x: 805, y: 580 },
-  'DLI_PNK_VINOBAPURI': { x: 780, y: 600 },
-  'DLI_PNK_SOUTH_EXT': { x: 680, y: 620 },
+  // === VIOLET LINE (South corridor Kashmere Gate -> Faridabad) ===
+  // DLI_INTER_KASHMERE: (650, 280)
+  // DLI_INTER_MANDIHOUSE: (770, 480)
+  'DLI_VIO_JANPATH': { x: 715, y: 550 },
+  // DLI_INTER_CENTRAL: (650, 610)
+  'DLI_VIO_JANGPURA': { x: 720, y: 650 },
+  'DLI_VIO_JN_STADIUM': { x: 755, y: 680 },
+  'DLI_INTER_LAJPAT': { x: 790, y: 710 }, // Lajpat Nagar (Interchange Pink)
+  'DLI_VIO_MOOLCHAND': { x: 820, y: 750 },
+  'DLI_VIO_OKHLA': { x: 845, y: 800 },
+  'DLI_VIO_SARITAVIHAR': { x: 865, y: 850 },
+  'DLI_VIO_TUGHLAKABAD': { x: 885, y: 900 },
+  'DLI_VIO_NHPC': { x: 905, y: 950 },
+  'DLI_VIO_BADARPUR': { x: 925, y: 1000 },
+  'DLI_VIO_FARIDABAD': { x: 945, y: 1050 },
+
+  // === GREEN LINE (West Corridor Inderlok/Kirti Nagar -> Tikri) ===
+  // DLI_INTER_INDERLOK: (380, 280)
+  'DLI_GRE_ASHOKPARK': { x: 380, y: 350 },
+  'DLI_GRE_SATGURU': { x: 445, y: 415 },
+  // DLI_INTER_KIRTINAGAR: (515, 480)
+  'DLI_GRE_PASCHIM': { x: 320, y: 350 },
+  'DLI_GRE_NANGLOI': { x: 260, y: 350 },
+  'DLI_GRE_MUNDKA': { x: 200, y: 350 },
+  'DLI_GRE_MUNDKA_IND': { x: 150, y: 350 },
+  'DLI_GRE_TIKRI': { x: 100, y: 350 },
+  'DLI_GRE_SHREERAM': { x: 50, y: 350 },
+
+  // === PINK LINE (Orbital Ring Line) ===
+  'DLI_PNK_MAJLIS': { x: 530, y: 120 },
+  // Azadpur at (650, 170)
+  // NSP at (240, 280)
+  // Rajouri Garden at (365, 480)
+  'DLI_PNK_MAYAPURI': { x: 410, y: 560 },
+  'DLI_PNK_BHIKAJI': { x: 490, y: 630 },
+  // INA at (650, 675)
+  'DLI_PNK_SOUTHEXT': { x: 720, y: 690 },
+  // Lajpat Nagar at (790, 710)
+  'DLI_PNK_VINOBAPURI': { x: 840, y: 675 },
+  'DLI_PNK_ASHRAM': { x: 860, y: 625 },
+  'DLI_PNK_NIZAMUDDIN': { x: 860, y: 575 },
+  // Mayur Vihar-1 at (860, 520)
+  'DLI_PNK_MAYURPK1': { x: 860, y: 440 },
+  // Welcome at (780, 280)
+  'DLI_PNK_KARKARDUMA': { x: 840, y: 220 },
+  'DLI_PNK_SHIVVIHAR': { x: 880, y: 170 },
+
+  // === MAGENTA LINE (Southern Cross-Link Janakpuri W -> Botanical Garden) ===
+  // Janakpuri West at (300, 480)
+  'DLI_MAG_MUNIRKA': { x: 480, y: 765 },
+  'DLI_MAG_IIT': { x: 565, y: 780 },
+  // Hauz Khas at (650, 795)
+  'DLI_MAG_OKHLANSIC': { x: 845, y: 760 },
+  'DLI_MAG_JAMIA': { x: 990, y: 690 },
+  // Botanical Garden at (1140, 585)
+
+  // === AIRPORT EXPRESS (Orange High-Speed Line) ===
+  // Rajiv Chowk at (650, 480)
+  'DLI_ORG_IGI': { x: 200, y: 530 },
+  // Dwarka Sec 21 at (50, 480)
+
+  // === GURGAON RAPID METRO ===
+  // Sikandarpur at (650, 1095)
+  'DLI_RM_DLF3': { x: 740, y: 1095 }
 };
 
-// Fallback grid projection generator for missing coordinate keys
-const getStationCoords = (station: MetroStation, idx: number, total: number) => {
-  if (schematicCoordinates[station.id]) {
-    return schematicCoordinates[station.id];
-  }
-  // Default grid alignment based on index
-  if (station.network === 'Noida Metro') {
-    return { x: 1330, y: 470 + idx * 40 };
-  }
-  return { x: 200 + (idx % 20) * 50, y: 250 + Math.floor(idx / 20) * 80 };
-};
+// Major landmark interchange stations that always show readable badge labels
+const prominentStationIds = new Set([
+  'DLI_INTER_RAJIV',
+  'DLI_INTER_KASHMERE',
+  'DLI_INTER_MANDIHOUSE',
+  'DLI_INTER_CENTRAL',
+  'DLI_INTER_INA',
+  'DLI_INTER_HAUZ_KHAS',
+  'DLI_INTER_LAJPAT',
+  'DLI_INTER_MAYUR1',
+  'DLI_INTER_BOTANICAL',
+  'DLI_INTER_NOIDA52',
+  'NMRC_AQ_N51',
+  'NMRC_AQ_PARICHOWK',
+  'DLI_INTER_JANAKPURI',
+  'DLI_INTER_RAJOURI',
+  'DLI_INTER_KIRTINAGAR',
+  'DLI_INTER_INDERLOK',
+  'DLI_INTER_NSP',
+  'DLI_INTER_AZADPUR',
+  'DLI_INTER_WELCOME',
+  'DLI_INTER_DWARKA21',
+  'DLI_YEL_HUDA',
+  'DLI_RED_SHAHEED'
+]);
 
 export default function MetroMap({ language }: MetroMapProps) {
   const router = useRouter();
   const t = useTranslation(language);
 
-  // Filter States
-  const [selectedNetwork, setSelectedNetwork] = useState('Delhi Metro');
+  // States
+  const [selectedNetwork, setSelectedNetwork] = useState('All Metro Networks');
+  const [selectedLineFilter, setSelectedLineFilter] = useState<string>('ALL');
   const [routeMode, setRouteMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<MetroStation[]>([]);
 
   // Selection & Route States
   const [selectedStation, setSelectedStation] = useState<MetroStation | null>(null);
+  const [hoveredStation, setHoveredStation] = useState<MetroStation | null>(null);
   const [sourceStationId, setSourceStationId] = useState<string>('');
   const [destStationId, setDestStationId] = useState<string>('');
   const [activeRoute, setActiveRoute] = useState<MetroRoute | null>(null);
 
-  // SVG Pan & Zoom States
+  // Pan & Zoom
   const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: -280, y: -120 });
+  const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Load all stations and lines
+  // Data sets
   const [stations, setStations] = useState<MetroStation[]>([]);
   const [lines, setLines] = useState<MetroLine[]>([]);
 
+  // Load networks based on filter
   useEffect(() => {
     let activeStations: MetroStation[] = [];
     let activeLines: MetroLine[] = [];
 
-    if (selectedNetwork === 'All Metro Networks') {
-      activeStations = [...(metroNetworks['Delhi']?.stations || []), ...(metroNetworks['Noida']?.stations || [])];
-      activeLines = [...(metroNetworks['Delhi']?.lines || []), ...(metroNetworks['Noida']?.lines || [])];
-    } else if (selectedNetwork === 'Noida Metro') {
+    if (selectedNetwork === 'Noida Metro') {
       activeStations = metroNetworks['Noida']?.stations || [];
       activeLines = metroNetworks['Noida']?.lines || [];
-    } else {
+      // Focus on Noida
+      setZoom(1.3);
+      setPan({ x: -450, y: -250 });
+    } else if (selectedNetwork === 'Delhi Metro') {
       activeStations = metroNetworks['Delhi']?.stations || [];
       activeLines = metroNetworks['Delhi']?.lines || [];
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
+    } else {
+      activeStations = [
+        ...(metroNetworks['Delhi']?.stations || []),
+        ...(metroNetworks['Noida']?.stations || [])
+      ];
+      activeLines = [
+        ...(metroNetworks['Delhi']?.lines || []),
+        ...(metroNetworks['Noida']?.lines || [])
+      ];
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
     }
 
     setStations(activeStations);
     setLines(activeLines);
+    setSelectedLineFilter('ALL');
   }, [selectedNetwork]);
 
   // Recalculate route when source/destination IDs change
@@ -213,11 +275,11 @@ export default function MetroMap({ language }: MetroMapProps) {
 
   // Handle Search Input
   useEffect(() => {
-    if (searchQuery.trim() === '') {
+    if (!searchQuery.trim()) {
       setSearchResults([]);
       return;
     }
-    const q = searchQuery.toLowerCase();
+    const q = searchQuery.toLowerCase().trim();
     const matches = stations.filter(
       (s) => s.name.toLowerCase().includes(q) || s.code.toLowerCase().includes(q) || s.line.toLowerCase().includes(q)
     );
@@ -225,25 +287,26 @@ export default function MetroMap({ language }: MetroMapProps) {
   }, [searchQuery, stations]);
 
   // Pan & Zoom controls
-  const handleZoom = (type: 'in' | 'out' | 'reset' | 'fit') => {
+  const handleZoom = (type: 'in' | 'out' | 'reset') => {
     if (type === 'in') setZoom((z) => Math.min(z + 0.3, 3.5));
-    else if (type === 'out') setZoom((z) => Math.max(z - 0.3, 0.5));
+    else if (type === 'out') setZoom((z) => Math.max(z - 0.3, 0.6));
     else if (type === 'reset') {
       setZoom(1);
-      setPan({ x: -280, y: -120 });
-    } else if (type === 'fit') {
-      setZoom(0.85);
-      setPan({ x: -150, y: -50 });
+      setPan({ x: 0, y: 0 });
+      setSelectedStation(null);
+      setSelectedLineFilter('ALL');
     }
   };
 
   const focusStation = (station: MetroStation) => {
-    const coords = getStationCoords(station, 0, 1);
-    setZoom(1.8);
-    setPan({
-      x: 450 - coords.x * 1.8,
-      y: 300 - coords.y * 1.8,
-    });
+    const coords = schematicCoordinates[station.id];
+    if (coords) {
+      setZoom(1.8);
+      setPan({
+        x: 450 - coords.x * 1.8,
+        y: 280 - coords.y * 1.8
+      });
+    }
     setSelectedStation(station);
     setSearchQuery('');
   };
@@ -259,38 +322,69 @@ export default function MetroMap({ language }: MetroMapProps) {
     if (!isDragging) return;
     setPan({
       x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y,
+      y: e.clientY - dragStart.y
     });
   };
 
   const handleMouseUp = () => setIsDragging(false);
 
-  // Check if a station/line is part of the active route
+  // Wheel zoom
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const zoomFactor = e.deltaY < 0 ? 1.15 : 0.88;
+    setZoom((z) => Math.min(Math.max(z * zoomFactor, 0.6), 3.5));
+  };
+
+  // Check if station or line is active in route
   const isStationInRoute = (stationId: string) => {
     if (!activeRoute) return true;
     return activeRoute.stops.some((s) => s.stationId === stationId);
   };
 
+  const isLineHighlighted = (line: MetroLine) => {
+    if (selectedLineFilter !== 'ALL' && line.name !== selectedLineFilter) {
+      return false;
+    }
+    if (activeRoute) {
+      return line.stations.some((stId) => activeRoute.stops.some((r) => r.stationId === stId));
+    }
+    return true;
+  };
+
+  // Line filter pills list
+  const filterLines = [
+    { label: language === 'en' ? 'All Lines' : 'सभी लाइनें', value: 'ALL', color: 'var(--metro-navy)' },
+    { label: language === 'en' ? 'Blue Line' : 'ब्लू लाइन', value: 'Blue Line', color: '#0066CC' },
+    { label: language === 'en' ? 'Yellow Line' : 'येलो लाइन', value: 'Yellow Line', color: '#F59E0B' },
+    { label: language === 'en' ? 'Red Line' : 'रेड लाइन', value: 'Red Line', color: '#DC241F' },
+    { label: language === 'en' ? 'Pink Line' : 'पिंक लाइन', value: 'Pink Line', color: '#EC4899' },
+    { label: language === 'en' ? 'Violet Line' : 'वायलेट लाइन', value: 'Violet Line', color: '#7F00FF' },
+    { label: language === 'en' ? 'Aqua Line (Noida)' : 'एक्वा लाइन (नोएडा)', value: 'Aqua Line', color: '#00A8E8' },
+    { label: language === 'en' ? 'Green Line' : 'ग्रीन लाइन', value: 'Green Line', color: '#10B981' },
+    { label: language === 'en' ? 'Magenta Line' : 'मजेंटा लाइन', value: 'Magenta Line', color: '#C026D3' },
+    { label: language === 'en' ? 'Airport Express' : 'एयरपोर्ट एक्सप्रेस', value: 'Airport Express', color: '#F97316' }
+  ];
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      {/* Top Controls Header */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {/* 1. Header Toolbar */}
       <div
         className="card"
         style={{
-          padding: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
+          padding: '16px 20px',
           border: '2px solid rgba(0, 87, 184, 0.2)',
+          boxShadow: '0 4px 16px rgba(11, 31, 58, 0.06)'
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '14px' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 800, color: 'var(--metro-navy)' }}>
-              🗺️ Metro Maps & Transit Network
+            <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, color: 'var(--metro-navy)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span>🗺️</span> {language === 'en' ? 'Interactive Schematic Metro Map' : 'इंटरैक्टिव योजनाबद्ध मेट्रो मानचित्र'}
             </h2>
             <div style={{ fontSize: '0.85rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
-              Explore schematic metro networks across India with dynamic route highlighting
+              {language === 'en'
+                ? 'High-contrast transit network diagram with line isolation and route highlighting'
+                : 'लाइन पृथक्करण और मार्ग हाइलाइटिंग के साथ उच्च-कंट्रास्ट मेट्रो नेटवर्क'}
             </div>
           </div>
 
@@ -301,37 +395,37 @@ export default function MetroMap({ language }: MetroMapProps) {
               onClick={() => setRouteMode(!routeMode)}
               style={{ fontSize: '0.85rem', padding: '8px 16px' }}
             >
-              {routeMode ? '✕ Exit Route Mode' : '🗺️ Plan Route Mode'}
+              {routeMode
+                ? (language === 'en' ? '✕ Exit Route Mode' : '✕ रूट मोड बंद करें')
+                : (language === 'en' ? '📍 Plan Route on Map' : '📍 मानचित्र पर मार्ग खोजें')}
             </button>
           </div>
         </div>
 
-        {/* Filter Controls Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px', alignItems: 'flex-end' }}>
-          {/* Network Selector */}
+        {/* Search & Network Selector Row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px', alignItems: 'flex-end' }}>
           <div>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '4px' }}>
-              Metro Network:
+              {language === 'en' ? 'Select Metro Network:' : 'मेट्रो नेटवर्क चुनें:'}
             </label>
             <select
               value={selectedNetwork}
               onChange={(e) => setSelectedNetwork(e.target.value)}
-              style={{ margin: 0, padding: '10px' }}
+              style={{ margin: 0, padding: '10px', fontWeight: 700 }}
             >
+              <option value="All Metro Networks">{language === 'en' ? 'All Metro Networks (Delhi NCR + Noida)' : 'सभी मेट्रो नेटवर्क'}</option>
               <option value="Delhi Metro">Delhi Metro (DMRC)</option>
               <option value="Noida Metro">Noida Metro (NMRC Aqua Line)</option>
-              <option value="All Metro Networks">All Metro Networks</option>
             </select>
           </div>
 
-          {/* Station Search */}
           <div style={{ position: 'relative' }}>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '4px' }}>
-              Search Station:
+              {language === 'en' ? 'Search Station on Map:' : 'मानचित्र पर स्टेशन खोजें:'}
             </label>
             <input
               type="text"
-              placeholder="Search station e.g. Rajiv Chowk, Noida Sector 51..."
+              placeholder={language === 'en' ? 'Search e.g. Rajiv Chowk, Noida Sector 51, Lajpat Nagar...' : 'उदा., राजीव चौक, नोएडा सेक्टर 51...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ margin: 0, padding: '10px' }}
@@ -347,10 +441,10 @@ export default function MetroMap({ language }: MetroMapProps) {
                   border: '1px solid var(--metro-card-border)',
                   borderRadius: '10px',
                   zIndex: 100,
-                  maxHeight: '200px',
+                  maxHeight: '220px',
                   overflowY: 'auto',
-                  boxShadow: '0 8px 24px rgba(15,23,42,0.15)',
-                  marginTop: '4px',
+                  boxShadow: '0 8px 24px rgba(15,23,42,0.18)',
+                  marginTop: '4px'
                 }}
               >
                 {searchResults.map((st) => (
@@ -369,8 +463,10 @@ export default function MetroMap({ language }: MetroMapProps) {
                       borderBottom: '1px solid var(--metro-card-border)',
                       display: 'flex',
                       justifyContent: 'space-between',
-                      alignItems: 'center',
+                      alignItems: 'center'
                     }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--metro-light-bg)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                   >
                     <div>
                       <strong style={{ color: 'var(--metro-navy)' }}>{st.name}</strong>
@@ -385,19 +481,19 @@ export default function MetroMap({ language }: MetroMapProps) {
             )}
           </div>
 
-          {/* Route Mode Inputs */}
+          {/* Route Mode Selectors */}
           {routeMode && (
             <>
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '4px' }}>
-                  From Station:
+                  {language === 'en' ? 'From Station:' : 'स्रोत स्टेशन:'}
                 </label>
                 <select
                   value={sourceStationId}
                   onChange={(e) => setSourceStationId(e.target.value)}
                   style={{ margin: 0, padding: '10px' }}
                 >
-                  <option value="">Select Origin</option>
+                  <option value="">{language === 'en' ? '-- Select Origin --' : '-- स्रोत चुनें --'}</option>
                   {stations.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name} ({s.line})
@@ -408,14 +504,14 @@ export default function MetroMap({ language }: MetroMapProps) {
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '4px' }}>
-                  To Station:
+                  {language === 'en' ? 'To Station:' : 'गंतव्य स्टेशन:'}
                 </label>
                 <select
                   value={destStationId}
                   onChange={(e) => setDestStationId(e.target.value)}
                   style={{ margin: 0, padding: '10px' }}
                 >
-                  <option value="">Select Destination</option>
+                  <option value="">{language === 'en' ? '-- Select Destination --' : '-- गंतव्य चुनें --'}</option>
                   {stations.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name} ({s.line})
@@ -426,89 +522,197 @@ export default function MetroMap({ language }: MetroMapProps) {
             </>
           )}
         </div>
+
+        {/* 2. Interactive Line Filter Pills */}
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', padding: '10px 0 2px', marginTop: '6px' }}>
+          {filterLines.map((fl) => {
+            const isSelected = selectedLineFilter === fl.value;
+            return (
+              <button
+                key={fl.value}
+                type="button"
+                onClick={() => setSelectedLineFilter(fl.value)}
+                style={{
+                  padding: '6px 14px',
+                  borderRadius: '20px',
+                  border: `1.5px solid ${fl.color}`,
+                  background: isSelected ? fl.color : '#FFFFFF',
+                  color: isSelected ? '#FFFFFF' : fl.color,
+                  fontWeight: 700,
+                  fontSize: '0.78rem',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: isSelected ? '0 2px 8px rgba(0,0,0,0.15)' : 'none'
+                }}
+              >
+                {fl.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* SVG Canvas Map Box */}
+      {/* 3. Active Route Summary Banner (if route planned) */}
+      {activeRoute && (
+        <div
+          style={{
+            background: 'linear-gradient(135deg, var(--metro-navy) 0%, #0F2942 100%)',
+            color: '#FFFFFF',
+            padding: '16px 20px',
+            borderRadius: '14px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '12px',
+            border: '2px solid var(--metro-blue)'
+          }}
+        >
+          <div>
+            <span style={{ fontSize: '0.75rem', color: '#38BDF8', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              {language === 'en' ? 'Active Route Highlighted on Map' : 'सक्रिय मार्ग मानचित्र पर प्रदर्शित'}
+            </span>
+            <div style={{ fontSize: '1.15rem', fontWeight: 800, marginTop: '2px' }}>
+              {activeRoute.source} ➔ {activeRoute.destination}
+            </div>
+            <div style={{ fontSize: '0.85rem', color: '#CBD5E1', marginTop: '4px' }}>
+              {activeRoute.totalStops} stops • {activeRoute.interchanges} transfer(s) • ~{activeRoute.estimatedTime} mins • ₹{activeRoute.totalFare}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={() => router.push(`/journey?src=${sourceStationId}&dest=${destStationId}`)}
+            style={{ padding: '10px 18px', fontSize: '0.88rem' }}
+          >
+            {language === 'en' ? 'Open Full Journey Plan ➔' : 'पूर्ण यात्रा विवरण देखें ➔'}
+          </button>
+        </div>
+      )}
+
+      {/* 4. Main SVG Canvas Map Container */}
       <div
         style={{
           position: 'relative',
           width: '100%',
-          height: '560px',
+          height: '620px',
           borderRadius: '18px',
           overflow: 'hidden',
           border: '2px solid var(--metro-card-border)',
-          background: '#FAFAFA',
-          boxShadow: '0 8px 24px rgba(11, 31, 58, 0.08)',
+          background: '#FFFFFF',
+          boxShadow: '0 8px 30px rgba(11, 31, 58, 0.08)'
         }}
       >
         <svg
           ref={svgRef}
           width="100%"
           height="100%"
-          viewBox="0 0 900 560"
-          style={{ cursor: isDragging ? 'grabbing' : 'grab', userSelect: 'none', touchAction: 'none' }}
+          viewBox="0 0 1550 1350"
+          style={{
+            cursor: isDragging ? 'grabbing' : 'grab',
+            userSelect: 'none',
+            touchAction: 'none'
+          }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
+          onWheel={handleWheel}
         >
-          {/* Subtle Transit Grid Background Pattern */}
+          {/* Schematic Graph Background */}
           <defs>
-            <pattern id="schematicGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 87, 184, 0.04)" strokeWidth="1" />
+            <pattern id="cleanGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(11, 31, 58, 0.03)" strokeWidth="1" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#schematicGrid)" />
+          <rect width="100%" height="100%" fill="url(#cleanGrid)" />
 
           {/* Pan & Zoom Transform Group */}
           <g transform={`translate(${pan.x}, ${pan.y}) scale(${zoom})`}>
-            {/* Render Line Paths */}
+            {/* Draw All Metro Line Paths */}
             {lines.map((line) => {
               const lineStations = line.stations
                 .map((id) => stations.find((s) => s.id === id))
-                .filter((s): s is MetroStation => !!s);
+                .filter((s): s is MetroStation => !!s && !!schematicCoordinates[s.id]);
 
               if (lineStations.length < 2) return null;
 
-              // Compute path data
+              // Build smooth schematic path
               let d = '';
               lineStations.forEach((st, idx) => {
-                const coords = getStationCoords(st, idx, lineStations.length);
-                if (idx === 0) d += `M ${coords.x} ${coords.y}`;
-                else d += ` L ${coords.x} ${coords.y}`;
+                const pt = schematicCoordinates[st.id];
+                if (idx === 0) d += `M ${pt.x} ${pt.y}`;
+                else d += ` L ${pt.x} ${pt.y}`;
               });
 
-              const isLineActiveInRoute = activeRoute
-                ? lineStations.some((st) => activeRoute.stops.some((rSt) => rSt.stationId === st.id))
-                : true;
+              const isHighlighted = isLineHighlighted(line);
 
               return (
-                <path
-                  key={line.id}
-                  d={d}
-                  fill="none"
-                  stroke={line.color || '#0057B8'}
-                  strokeWidth="7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  opacity={activeRoute ? (isLineActiveInRoute ? 1 : 0.2) : 1}
-                  style={{ transition: 'opacity 0.3s ease' }}
-                />
+                <g key={`line_group_${line.id}`}>
+                  {/* Subtle Glow aura when isolated or in active route */}
+                  {(selectedLineFilter === line.name || (activeRoute && isHighlighted)) && (
+                    <path
+                      d={d}
+                      fill="none"
+                      stroke={line.color || '#0057B8'}
+                      strokeWidth="16"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.3"
+                    />
+                  )}
+
+                  {/* Main Line Stroke */}
+                  <path
+                    d={d}
+                    fill="none"
+                    stroke={line.color || '#0057B8'}
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity={isHighlighted ? 1 : 0.12}
+                    style={{ transition: 'opacity 0.25s ease' }}
+                  />
+                </g>
               );
             })}
 
-            {/* Render Walking Transfer Link between Noida Sec 51 (Aqua) & Sec 52 (Blue) */}
+            {/* Dedicated 300m Walking Transfer between Noida Sec 51 (Aqua Line) & Sec 52 (Blue Line) */}
             {(() => {
-              const st51 = stations.find((s) => s.id === 'NMRC_AQ_N51');
-              const st52 = stations.find((s) => s.id === 'DLI_INTER_NOIDA52');
-              if (st51 && st52) {
-                const p1 = getStationCoords(st51, 0, 1);
-                const p2 = getStationCoords(st52, 0, 1);
+              const p51 = schematicCoordinates['NMRC_AQ_N51'];
+              const p52 = schematicCoordinates['DLI_INTER_NOIDA52'];
+              if (p51 && p52) {
                 return (
-                  <g key="walking_link_sec51_52">
-                    <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke="#F59E0B" strokeWidth="4" strokeDasharray="5 5" />
-                    <rect x={(p1.x + p2.x) / 2 - 40} y={(p1.y + p2.y) / 2 - 12} width="80" height="18" rx="4" fill="#FFFBEB" stroke="#F59E0B" strokeWidth="1" />
-                    <text x={(p1.x + p2.x) / 2} y={(p1.y + p2.y) / 2} fontSize="9" fontWeight="800" fill="#92400E" textAnchor="middle">
+                  <g key="walking_transfer_bridge">
+                    <line
+                      x1={p51.x}
+                      y1={p51.y}
+                      x2={p52.x}
+                      y2={p52.y}
+                      stroke="#F59E0B"
+                      strokeWidth="5"
+                      strokeDasharray="6 6"
+                    />
+                    <rect
+                      x={(p51.x + p52.x) / 2 + 10}
+                      y={(p51.y + p52.y) / 2 - 12}
+                      width="92"
+                      height="24"
+                      rx="6"
+                      fill="#FFFBEB"
+                      stroke="#F59E0B"
+                      strokeWidth="1.5"
+                    />
+                    <text
+                      x={(p51.x + p52.x) / 2 + 56}
+                      y={(p51.y + p52.y) / 2 + 4}
+                      fontSize="10"
+                      fontWeight="800"
+                      fill="#92400E"
+                      textAnchor="middle"
+                    >
                       🚶 300m Walk
                     </text>
                   </g>
@@ -517,60 +721,121 @@ export default function MetroMap({ language }: MetroMapProps) {
               return null;
             })()}
 
-            {/* Render Station Nodes */}
+            {/* Draw Station Nodes */}
             {stations.map((st, idx) => {
-              const coords = getStationCoords(st, idx, stations.length);
-              const isSelected = selectedStation?.id === st.id;
-              const isRouteActive = isStationInRoute(st.id);
-              const isImportantInterchange = st.isInterchange;
+              const pt = schematicCoordinates[st.id];
+              if (!pt) return null;
 
-              // Hide labels at zoom level 1 unless searched, selected, route active, or important interchange
-              const showLabel = zoom > 1.3 || isSelected || (activeRoute && isRouteActive) || isImportantInterchange || searchQuery.length > 0;
+              const isSelected = selectedStation?.id === st.id;
+              const isSource = sourceStationId === st.id;
+              const isDest = destStationId === st.id;
+              const inActiveRoute = isStationInRoute(st.id);
+              const isInterchange = st.isInterchange;
+              const isProminent = prominentStationIds.has(st.id);
+
+              // Intelligent Label Visibility:
+              // Prominent interchanges & terminal stations always show badge.
+              // When zooming > 1.2 or searching or hovering or in route, full labels appear!
+              const showText =
+                zoom > 1.2 ||
+                isSelected ||
+                isSource ||
+                isDest ||
+                isProminent ||
+                searchQuery.length > 0 ||
+                (selectedLineFilter !== 'ALL' && st.line === selectedLineFilter);
+
+              const opacity = activeRoute ? (inActiveRoute ? 1 : 0.18) : selectedLineFilter !== 'ALL' ? (st.line === selectedLineFilter ? 1 : 0.18) : 1;
 
               return (
                 <g
                   key={st.id}
-                  style={{ cursor: 'pointer', transition: 'opacity 0.3s ease' }}
-                  opacity={activeRoute ? (isRouteActive ? 1 : 0.25) : 1}
+                  style={{ cursor: 'pointer', transition: 'opacity 0.25s ease' }}
+                  opacity={opacity}
                   onClick={(e) => {
                     e.stopPropagation();
                     setSelectedStation(st);
                   }}
+                  onMouseEnter={() => setHoveredStation(st)}
+                  onMouseLeave={() => setHoveredStation(null)}
                 >
-                  {/* Selection Highlight Aura */}
-                  {isSelected && (
-                    <circle cx={coords.x} cy={coords.y} r="16" fill="var(--metro-blue)" fillOpacity="0.3" stroke="var(--metro-blue)" strokeWidth="2" />
+                  {/* Selection Pulsing Ring */}
+                  {(isSelected || isSource || isDest) && (
+                    <circle
+                      cx={pt.x}
+                      cy={pt.y}
+                      r="18"
+                      fill={isSource ? '#E53935' : isDest ? '#10B981' : '#0057B8'}
+                      fillOpacity="0.25"
+                      stroke={isSource ? '#E53935' : isDest ? '#10B981' : '#0057B8'}
+                      strokeWidth="2.5"
+                    />
                   )}
 
-                  {/* Node Symbol */}
-                  {st.isInterchange ? (
+                  {/* Station Node Symbol */}
+                  {isInterchange ? (
                     <g>
-                      <circle cx={coords.x} cy={coords.y} r="8" fill="#FFFFFF" stroke="var(--metro-navy)" strokeWidth="3" />
-                      <circle cx={coords.x} cy={coords.y} r="4" fill="#7F00FF" />
+                      {/* Double Concentric Interchange Node */}
+                      <circle cx={pt.x} cy={pt.y} r="10" fill="#FFFFFF" stroke="#0B1F3A" strokeWidth="3.5" />
+                      <circle cx={pt.x} cy={pt.y} r="5" fill="#7F00FF" />
                     </g>
                   ) : (
-                    <circle cx={coords.x} cy={coords.y} r="5" fill="#FFFFFF" stroke={st.lineColor || '#0057B8'} strokeWidth="2.5" />
+                    <circle
+                      cx={pt.x}
+                      cy={pt.y}
+                      r="5.5"
+                      fill="#FFFFFF"
+                      stroke={st.lineColor || '#0057B8'}
+                      strokeWidth="3"
+                    />
                   )}
 
-                  {/* Station Name Label */}
-                  {showLabel && (
-                    <g>
-                      <text
-                        x={coords.x + 9}
-                        y={coords.y + (idx % 2 === 0 ? -6 : 10)}
-                        fontSize="9.5"
-                        fontWeight={st.isInterchange || isSelected ? 800 : 600}
-                        fill={isSelected ? 'var(--metro-blue)' : 'var(--metro-navy)'}
-                        style={{
-                          paintOrder: 'stroke',
-                          stroke: '#FFFFFF',
-                          strokeWidth: '3px',
-                          strokeLinecap: 'round',
-                          strokeLinejoin: 'round',
-                        }}
-                      >
-                        {st.name}
-                      </text>
+                  {/* Clean Station Name Label with Anti-Collision Alternation */}
+                  {showText && (
+                    <g pointerEvents="none">
+                      {isProminent ? (
+                        // Prominent Pill Badge for Hub Stations
+                        <g>
+                          <rect
+                            x={pt.x + 12}
+                            y={pt.y - 12}
+                            width={st.name.length * 7.5 + 16}
+                            height="22"
+                            rx="6"
+                            fill="#FFFFFF"
+                            stroke="#0B1F3A"
+                            strokeWidth="1.5"
+                            filter="drop-shadow(0 2px 4px rgba(0,0,0,0.1))"
+                          />
+                          <text
+                            x={pt.x + 20}
+                            y={pt.y + 3}
+                            fontSize="11"
+                            fontWeight="800"
+                            fill="#0B1F3A"
+                          >
+                            {st.name}
+                          </text>
+                        </g>
+                      ) : (
+                        // Regular Station Clean Text with White Stroke Halo
+                        <text
+                          x={pt.x + 10}
+                          y={pt.y + (idx % 2 === 0 ? -7 : 11)}
+                          fontSize="10"
+                          fontWeight={isSelected ? 800 : 600}
+                          fill={isSelected ? '#0057B8' : '#0B1F3A'}
+                          style={{
+                            paintOrder: 'stroke',
+                            stroke: '#FFFFFF',
+                            strokeWidth: '4px',
+                            strokeLinecap: 'round',
+                            strokeLinejoin: 'round'
+                          }}
+                        >
+                          {st.name}
+                        </text>
+                      )}
                     </g>
                   )}
                 </g>
@@ -579,14 +844,43 @@ export default function MetroMap({ language }: MetroMapProps) {
           </g>
         </svg>
 
-        {/* Floating Zoom & Control Buttons */}
+        {/* Hover Station Quick Tooltip */}
+        {hoveredStation && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '16px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: 'rgba(11, 31, 58, 0.95)',
+              color: '#FFFFFF',
+              padding: '8px 16px',
+              borderRadius: '20px',
+              fontSize: '0.82rem',
+              fontWeight: 700,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+              pointerEvents: 'none',
+              zIndex: 20,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <span>📍 {hoveredStation.name}</span>
+            <span>•</span>
+            <span style={{ color: hoveredStation.lineColor || '#38BDF8' }}>{hoveredStation.line}</span>
+            {hoveredStation.isInterchange && <span>⚡ (Interchange)</span>}
+          </div>
+        )}
+
+        {/* Floating Zoom Controls */}
         <div style={{ position: 'absolute', right: '16px', bottom: '16px', display: 'flex', flexDirection: 'column', gap: '8px', zIndex: 10 }}>
           <button
             type="button"
             className="btn-primary"
             onClick={() => handleZoom('in')}
-            title="Zoom In"
-            style={{ width: '40px', height: '40px', padding: 0, fontSize: '1.2rem' }}
+            title="Zoom In (+)"
+            style={{ width: '42px', height: '42px', padding: 0, fontSize: '1.3rem', borderRadius: '10px' }}
           >
             ＋
           </button>
@@ -594,28 +888,19 @@ export default function MetroMap({ language }: MetroMapProps) {
             type="button"
             className="btn-primary"
             onClick={() => handleZoom('out')}
-            title="Zoom Out"
-            style={{ width: '40px', height: '40px', padding: 0, fontSize: '1.2rem' }}
+            title="Zoom Out (-)"
+            style={{ width: '42px', height: '42px', padding: 0, fontSize: '1.3rem', borderRadius: '10px' }}
           >
             －
           </button>
           <button
             type="button"
             className="btn-secondary"
-            onClick={() => handleZoom('fit')}
-            title="Fit Network"
-            style={{ padding: '6px 10px', fontSize: '0.78rem', backgroundColor: 'var(--metro-navy)', color: '#FFFFFF' }}
-          >
-            Fit Network
-          </button>
-          <button
-            type="button"
-            className="btn-outline"
             onClick={() => handleZoom('reset')}
-            title="Reset View"
-            style={{ padding: '6px 10px', fontSize: '0.78rem', backgroundColor: '#FFFFFF' }}
+            title="Reset Map View"
+            style={{ padding: '8px 12px', fontSize: '0.78rem', backgroundColor: 'var(--metro-navy)', color: '#FFFFFF', borderRadius: '8px' }}
           >
-            Reset
+            {language === 'en' ? 'Center Map' : 'रीसेट करें'}
           </button>
         </div>
 
@@ -625,44 +910,45 @@ export default function MetroMap({ language }: MetroMapProps) {
             position: 'absolute',
             left: '16px',
             bottom: '16px',
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(6px)',
+            background: 'rgba(255, 255, 255, 0.96)',
+            backdropFilter: 'blur(8px)',
             padding: '12px 16px',
             borderRadius: '12px',
             border: '1px solid var(--metro-card-border)',
-            boxShadow: '0 4px 12px rgba(11, 31, 58, 0.1)',
+            boxShadow: '0 4px 14px rgba(11, 31, 58, 0.08)',
             fontSize: '0.78rem',
             display: 'flex',
             flexDirection: 'column',
             gap: '6px',
-            pointerEvents: 'none',
+            pointerEvents: 'none'
           }}
         >
           <div style={{ fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '2px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            Map Legend
+            {language === 'en' ? 'Transit Legend' : 'मानचित्र संकेत'}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', border: '2px solid #0057B8', background: '#FFFFFF' }} />
-            <span>Normal Station Node</span>
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', border: '2.5px solid #0057B8', background: '#FFFFFF' }} />
+            <span>{language === 'en' ? 'Standard Station' : 'सामान्य स्टेशन'}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ display: 'inline-block', width: '12px', height: '12px', borderRadius: '50%', border: '2.5px solid #0B1F3A', background: '#7F00FF' }} />
-            <span style={{ fontWeight: 700 }}>Interchange Station</span>
+            <span style={{ display: 'inline-block', width: '13px', height: '13px', borderRadius: '50%', border: '3px solid #0B1F3A', background: '#7F00FF' }} />
+            <strong style={{ color: 'var(--metro-navy)' }}>{language === 'en' ? 'Interchange Station' : 'इंटरचेंज स्टेशन'}</strong>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', border: '2px solid #00A8E8', background: '#FFFFFF' }} />
-            <span>NMRC Aqua Line (#00A8E8)</span>
+            <span style={{ display: 'inline-block', width: '18px', height: '4px', borderTop: '3px dashed #F59E0B' }} />
+            <span>{language === 'en' ? 'Walking Transfer (Sec 51 ↔ 52)' : 'पैदल स्थानांतरण (~300m)'}</span>
           </div>
         </div>
       </div>
 
-      {/* Selected Station Info Drawer */}
+      {/* 5. Selected Station Detailed Inspection Drawer */}
       {selectedStation && (
         <div
           className="card"
           style={{
             borderLeft: `6px solid ${selectedStation.lineColor || 'var(--metro-blue)'}`,
             animation: 'fadeIn 0.2s ease',
+            boxShadow: '0 8px 24px rgba(11, 31, 58, 0.1)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -673,53 +959,60 @@ export default function MetroMap({ language }: MetroMapProps) {
                 </span>
                 {selectedStation.isInterchange && (
                   <span style={{ fontSize: '0.75rem', padding: '2px 8px', borderRadius: '12px', background: '#F3E8FF', color: '#6B21A8', fontWeight: 800 }}>
-                    ⚡ Interchange Station
+                    ⚡ {language === 'en' ? 'Interchange Available' : 'इंटरचेंज उपलब्ध'}
                   </span>
                 )}
               </div>
-              <h3 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.35rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
                 {selectedStation.name} ({selectedStation.code})
               </h3>
               <div style={{ fontSize: '0.85rem', color: 'var(--metro-text-muted)', marginTop: '4px' }}>
-                Network: <strong>{selectedStation.network}</strong>
+                {language === 'en' ? 'Metro Authority / Network:' : 'मेट्रो प्राधिकरण:'} <strong>{selectedStation.network}</strong>
               </div>
             </div>
 
             <button
               type="button"
               onClick={() => setSelectedStation(null)}
-              style={{ background: 'transparent', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--metro-text-subtle)' }}
+              style={{ background: 'transparent', border: 'none', fontSize: '1.3rem', cursor: 'pointer', color: 'var(--metro-text-subtle)' }}
+              title="Close panel"
             >
               ✕
             </button>
           </div>
 
           {/* Details Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginTop: '16px', background: 'var(--metro-light-bg)', padding: '14px', borderRadius: '10px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '16px', background: 'var(--metro-light-bg)', padding: '14px', borderRadius: '12px' }}>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block' }}>CONNECTED LINES</span>
-              <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 700 }}>
+                {language === 'en' ? 'CONNECTING LINES' : 'कनेक्टिंग लाइनें'}
+              </span>
+              <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
                 {selectedStation.interchangeLines && selectedStation.interchangeLines.length > 0
                   ? [selectedStation.line, ...selectedStation.interchangeLines].join(', ')
                   : selectedStation.line}
               </strong>
             </div>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block' }}>PLATFORMS</span>
-              <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
-                {selectedStation.platformNumbers ? selectedStation.platformNumbers.join(', ') : 'Platform information unavailable'}
+              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 700 }}>
+                {language === 'en' ? 'PLATFORM GUIDANCE' : 'प्लेटफॉर्म मार्गदर्शन'}
+              </span>
+              <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
+                {selectedStation.platformNumbers ? `Platform ${selectedStation.platformNumbers.join(', ')}` : 'Platform information unavailable'}
               </strong>
             </div>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block' }}>ENTRY / EXIT GATES</span>
-              <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 700 }}>
+                {language === 'en' ? 'ENTRY / EXIT GATES' : 'प्रवेश / निकास द्वार'}
+              </span>
+              <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
                 {selectedStation.entryGates ? selectedStation.entryGates.join(', ') : 'Gate information unavailable'}
               </strong>
             </div>
           </div>
 
-          {/* CTAs */}
-          <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
+          {/* Quick Route Planning CTAs */}
+          <div style={{ display: 'flex', gap: '10px', marginTop: '16px', flexWrap: 'wrap' }}>
             <button
               type="button"
               className="btn-outline"
@@ -727,9 +1020,9 @@ export default function MetroMap({ language }: MetroMapProps) {
                 setSourceStationId(selectedStation.id);
                 setRouteMode(true);
               }}
-              style={{ flex: 1 }}
+              style={{ flex: 1, minWidth: '150px' }}
             >
-              Set as From 🚉
+              🚉 {language === 'en' ? 'Set as Origin' : 'स्रोत स्टेशन बनाएं'}
             </button>
             <button
               type="button"
@@ -738,18 +1031,18 @@ export default function MetroMap({ language }: MetroMapProps) {
                 setDestStationId(selectedStation.id);
                 setRouteMode(true);
               }}
-              style={{ flex: 1 }}
+              style={{ flex: 1, minWidth: '150px' }}
             >
-              Set as To 🎯
+              🎯 {language === 'en' ? 'Set as Destination' : 'गंतव्य स्टेशन बनाएं'}
             </button>
             {sourceStationId && destStationId && (
               <button
                 type="button"
                 className="btn-primary"
                 onClick={() => router.push(`/journey?src=${sourceStationId}&dest=${destStationId}`)}
-                style={{ flex: 1 }}
+                style={{ flex: 1, minWidth: '180px' }}
               >
-                Go to Journey Planner ➔
+                {language === 'en' ? 'Go to Journey Planner ➔' : 'यात्रा योजनाकार पर जाएं ➔'}
               </button>
             )}
           </div>
