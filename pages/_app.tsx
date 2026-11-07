@@ -18,9 +18,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>MetroSathi | AI Metro Navigation</title>
+        <title>MetroSathi | Metro Transit Portal & Route Navigator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="MetroSathi - India's AI-Powered Multi-City Metro Journey Navigation System" />
+        <meta name="description" content="MetroSathi - Official Multi-City Metro Journey Planner, Interactive Map & Digital Ticketing Portal" />
       </Head>
       <AuthProvider>
         <LanguageProvider>

@@ -100,7 +100,7 @@ export default function MetroSathiLogo({
               marginTop: '1px',
             }}
           >
-            AI METRO NAVIGATION
+            METRO TRANSIT PORTAL
           </span>
         </div>
       )}

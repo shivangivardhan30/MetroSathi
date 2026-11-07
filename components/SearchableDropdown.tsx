@@ -96,25 +96,25 @@ export default function SearchableDropdown({
           style={{
             width: '100%',
             padding: '12px 16px',
-            border: isOpen ? '2px solid var(--metro-blue)' : '1px solid var(--metro-card-border)',
-            borderRadius: '10px',
+            border: isOpen ? '1.5px solid var(--metro-blue)' : '1px solid var(--metro-card-border)',
+            borderRadius: '4px',
             background: disabled ? '#F1F5F9' : '#FFFFFF',
             color: selectedOption ? 'var(--metro-text-main)' : 'var(--metro-text-subtle)',
-            fontSize: '0.95rem',
+            fontSize: '0.92rem',
             fontWeight: selectedOption ? 600 : 400,
             cursor: disabled ? 'not-allowed' : 'pointer',
             textAlign: 'left',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            transition: 'all 0.2s ease',
-            boxShadow: isOpen ? '0 0 0 3px rgba(0, 87, 184, 0.12)' : 'none',
+            transition: 'all 0.15s ease',
+            boxShadow: isOpen ? '0 0 0 1px var(--metro-blue)' : 'none',
           }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, overflow: 'hidden' }}>
             {selectedOption ? (
               <>
-                <span style={{ fontWeight: 700, color: 'var(--metro-navy)' }}>{selectedOption.name}</span>
+                <span style={{ fontWeight: 600, color: 'var(--metro-navy)' }}>{selectedOption.name}</span>
                 {selectedOption.code && (
                   <span style={{ fontSize: '0.8rem', color: 'var(--metro-text-subtle)' }}>({selectedOption.code})</span>
                 )}
@@ -123,10 +123,10 @@ export default function SearchableDropdown({
                     style={{
                       fontSize: '0.72rem',
                       padding: '2px 8px',
-                      borderRadius: '10px',
+                      borderRadius: '4px',
                       backgroundColor: selectedOption.lineColor || 'var(--metro-blue)',
                       color: '#FFFFFF',
-                      fontWeight: 700,
+                      fontWeight: 600,
                       marginLeft: 'auto',
                     }}
                   >
@@ -138,7 +138,7 @@ export default function SearchableDropdown({
               <span>{placeholder}</span>
             )}
           </span>
-          <span style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', marginLeft: '8px', color: 'var(--metro-text-subtle)' }}>
+          <span style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', marginLeft: '8px', color: 'var(--metro-text-subtle)', fontSize: '0.7rem' }}>
             ▼
           </span>
         </button>
@@ -150,17 +150,17 @@ export default function SearchableDropdown({
               top: '100%',
               left: 0,
               right: 0,
-              marginTop: '6px',
+              marginTop: '4px',
               background: '#FFFFFF',
               border: '1px solid var(--metro-card-border)',
-              borderRadius: '12px',
-              boxShadow: '0 12px 28px rgba(15, 23, 42, 0.15)',
+              borderRadius: '6px',
+              boxShadow: '0 4px 16px rgba(15, 23, 42, 0.1)',
               zIndex: 1000,
               overflow: 'hidden',
               animation: 'fadeIn 0.15s ease',
             }}
           >
-            <div style={{ padding: '10px', backgroundColor: 'var(--metro-light-bg)', borderBottom: '1px solid var(--metro-card-border)' }}>
+            <div style={{ padding: '8px', backgroundColor: '#F8FAFC', borderBottom: '1px solid var(--metro-card-border)' }}>
               <input
                 ref={inputRef}
                 type="text"
@@ -169,10 +169,10 @@ export default function SearchableDropdown({
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '10px 14px',
+                  padding: '8px 12px',
                   border: '1px solid var(--metro-card-border)',
-                  borderRadius: '8px',
-                  fontSize: '0.9rem',
+                  borderRadius: '4px',
+                  fontSize: '0.88rem',
                   outline: 'none',
                   backgroundColor: '#FFFFFF',
                 }}
@@ -227,8 +227,8 @@ export default function SearchableDropdown({
                             </span>
                           )}
                           {option.isInterchange && (
-                            <span style={{ fontSize: '0.68rem', backgroundColor: 'rgba(127, 0, 255, 0.1)', color: '#7F00FF', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>
-                              ⚡ Interchange
+                            <span style={{ fontSize: '0.68rem', backgroundColor: '#F1F5F9', color: '#334155', padding: '1px 6px', borderRadius: '3px', fontWeight: 600, border: '1px solid #CBD5E1' }}>
+                              Interchange
                             </span>
                           )}
                         </div>

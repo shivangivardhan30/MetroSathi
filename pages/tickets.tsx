@@ -114,78 +114,78 @@ export default function TicketsPage() {
 
       <main className="container" style={{ paddingBottom: '60px' }}>
         {/* Page Header */}
-        <div style={{ margin: '24px 0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ margin: '20px 0 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', background: '#E0F2FE', color: '#0369A1', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 800, marginBottom: '8px' }}>
-              <TicketIcon size={16} color="#0369A1" />
-              <span>{language === 'en' ? 'DIGITAL METRO TICKETING' : 'डिजिटल मेट्रो टिकटिंग'}</span>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 10px', background: '#F1F5F9', color: '#334155', borderRadius: '4px', fontSize: '0.74rem', fontWeight: 600, marginBottom: '6px', border: '1px solid #CBD5E1' }}>
+              <TicketIcon size={14} color="#334155" />
+              <span>{language === 'en' ? 'TRANSIT FARE & TICKETING PORTAL' : 'पारगमन किराया एवं टिकटिंग पोर्टल'}</span>
             </div>
-            <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--metro-navy)', margin: 0 }}>
-              {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+            <h1 style={{ fontSize: '1.65rem', fontWeight: 700, color: 'var(--metro-navy)', margin: 0 }}>
+              {language === 'en' ? 'Purchase Metro QR Ticket' : 'मेट्रो टिकट खरीदें'}
             </h1>
-            <p style={{ color: 'var(--metro-text-muted)', fontSize: '0.95rem', marginTop: '6px', maxWidth: '640px' }}>
+            <p style={{ color: 'var(--metro-text-muted)', fontSize: '0.9rem', marginTop: '4px', maxWidth: '640px' }}>
               {language === 'en'
-                ? 'Generate instant digital QR tickets for single or group journeys across Delhi Metro (DMRC) and Noida Metro (NMRC).'
-                : 'दिल्ली मेट्रो (DMRC) और नोएडा मेट्रो (NMRC) में एकल या समूह यात्रा के लिए त्वरित डिजिटल क्यूआर टिकट प्राप्त करें।'}
+                ? 'Issue single or group electronic QR transit passes for Delhi Metro (DMRC) and connected lines.'
+                : 'दिल्ली मेट्रो (DMRC) और संबद्ध लाइनों के लिए एकल या समूह डिजिटल क्यूआर पास प्राप्त करें।'}
             </p>
           </div>
 
           {/* Prototype Badge */}
           <div className="demo-notice-badge" style={{ alignSelf: 'flex-start' }}>
-            ⚠️ {language === 'en' ? 'Prototype / Simulated Payment' : 'डेमो / सिमुलेटेड भुगतान'}
+            {language === 'en' ? 'Transit Gateway Simulation' : 'सिमुलेटेड टिकटिंग पोर्टल'}
           </div>
         </div>
 
         {/* Tab Controls */}
-        <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', borderBottom: '2px solid var(--metro-card-border)', paddingBottom: '12px' }}>
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', borderBottom: '1px solid var(--metro-card-border)', paddingBottom: '10px' }}>
           <button
             type="button"
             onClick={() => setActiveTab('book')}
             style={{
-              padding: '10px 20px',
-              borderRadius: '10px',
-              fontWeight: 800,
-              fontSize: '0.95rem',
+              padding: '8px 16px',
+              borderRadius: '4px',
+              fontWeight: 600,
+              fontSize: '0.88rem',
               cursor: 'pointer',
               border: 'none',
               background: activeTab === 'book' ? 'var(--metro-blue)' : '#FFFFFF',
               color: activeTab === 'book' ? '#FFFFFF' : 'var(--metro-navy)',
-              boxShadow: activeTab === 'book' ? '0 4px 12px rgba(0, 87, 184, 0.2)' : 'none',
-              transition: 'all 0.2s ease',
+              borderBottom: activeTab === 'book' ? '2px solid #1E40AF' : '1px solid #CBD5E1',
+              transition: 'all 0.15s ease',
             }}
           >
-            🎫 {language === 'en' ? 'Book New Ticket' : 'नया टिकट बुक करें'}
+            {language === 'en' ? 'Book New Ticket' : 'नया टिकट बुक करें'}
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('history')}
             style={{
-              padding: '10px 20px',
-              borderRadius: '10px',
-              fontWeight: 800,
-              fontSize: '0.95rem',
+              padding: '8px 16px',
+              borderRadius: '4px',
+              fontWeight: 600,
+              fontSize: '0.88rem',
               cursor: 'pointer',
               border: 'none',
               background: activeTab === 'history' ? 'var(--metro-blue)' : '#FFFFFF',
               color: activeTab === 'history' ? '#FFFFFF' : 'var(--metro-navy)',
-              boxShadow: activeTab === 'history' ? '0 4px 12px rgba(0, 87, 184, 0.2)' : 'none',
+              borderBottom: activeTab === 'history' ? '2px solid #1E40AF' : '1px solid #CBD5E1',
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              transition: 'all 0.2s ease',
+              transition: 'all 0.15s ease',
             }}
           >
-            📋 {language === 'en' ? 'My Booked Tickets' : 'मेरे बुक किए गए टिकट'}
+            {language === 'en' ? 'My Booked Tickets' : 'मेरे बुक किए गए टिकट'}
             {bookedTickets.length > 0 && (
               <span
                 style={{
-                  background: activeTab === 'history' ? '#FFFFFF' : 'var(--metro-blue)',
+                  background: activeTab === 'history' ? '#FFFFFF' : '#1E293B',
                   color: activeTab === 'history' ? 'var(--metro-blue)' : '#FFFFFF',
-                  borderRadius: '12px',
-                  padding: '2px 8px',
-                  fontSize: '0.75rem',
-                  fontWeight: 800,
+                  borderRadius: '3px',
+                  padding: '1px 6px',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
                 }}
               >
                 {bookedTickets.length}
@@ -196,17 +196,17 @@ export default function TicketsPage() {
 
         {/* TAB 1: BOOK NEW TICKET */}
         {activeTab === 'book' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)', gap: '24px', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)', gap: '20px', alignItems: 'start' }}>
             {/* Left: Journey & Station Config Card */}
             <div
               className="card"
               style={{
-                border: '2px solid rgba(0, 87, 184, 0.2)',
-                boxShadow: '0 8px 24px rgba(11, 31, 58, 0.08)',
+                border: '1px solid var(--metro-card-border)',
+                borderTop: '3px solid var(--metro-blue)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '8px' }}>
-                <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+                <h2 style={{ margin: 0, fontSize: '1.15rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
                   {language === 'en' ? 'Select Route & Passengers' : 'मार्ग और यात्री चुनें'}
                 </h2>
 
@@ -215,12 +215,13 @@ export default function TicketsPage() {
                   value={selectedNetwork}
                   onChange={(e) => setSelectedNetwork(e.target.value)}
                   style={{
-                    padding: '6px 12px',
-                    fontSize: '0.82rem',
-                    borderRadius: '8px',
+                    width: 'auto',
+                    padding: '5px 10px',
+                    fontSize: '0.8rem',
+                    borderRadius: '4px',
                     border: '1px solid var(--metro-card-border)',
                     background: '#FFFFFF',
-                    fontWeight: 700,
+                    fontWeight: 600,
                   }}
                 >
                   <option value="All">{language === 'en' ? 'All Networks' : 'सभी नेटवर्क'}</option>
@@ -230,14 +231,14 @@ export default function TicketsPage() {
               </div>
 
               {/* Station Selectors Row */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '10px', alignItems: 'flex-end', marginBottom: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '10px', alignItems: 'flex-end', marginBottom: '18px' }}>
                 <SearchableDropdown
                   options={stationOptions}
                   selectedId={sourceStation}
                   onChange={setSourceStation}
                   placeholder={t.routeDetails.sourceStation}
                   searchPlaceholder="Search origin station..."
-                  label={language === 'en' ? '🚉 Origin Station' : '🚉 स्रोत स्टेशन'}
+                  label={language === 'en' ? 'Origin Station' : 'स्रोत स्टेशन'}
                 />
 
                 <button
@@ -245,31 +246,25 @@ export default function TicketsPage() {
                   onClick={handleSwap}
                   title="Swap Stations"
                   style={{
-                    height: '42px',
-                    width: '42px',
-                    borderRadius: '50%',
-                    border: '1.5px solid var(--metro-blue)',
-                    background: '#FFFFFF',
-                    color: 'var(--metro-blue)',
-                    fontSize: '1.2rem',
-                    fontWeight: 800,
+                    height: '38px',
+                    width: '38px',
+                    borderRadius: '4px',
+                    border: '1px solid var(--metro-card-border)',
+                    background: '#F8FAFC',
+                    color: 'var(--metro-navy)',
+                    fontSize: '1rem',
+                    fontWeight: 700,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginBottom: '2px',
-                    transition: 'all 0.2s ease',
+                    transition: 'all 0.15s ease',
                   }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--metro-blue)';
-                    e.currentTarget.style.color = '#FFFFFF';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFFFFF';
-                    e.currentTarget.style.color = 'var(--metro-blue)';
-                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E2E8F0')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#F8FAFC')}
                 >
-                  ⇄
+                  &#8644;
                 </button>
 
                 <SearchableDropdown
@@ -278,16 +273,16 @@ export default function TicketsPage() {
                   onChange={setDestinationStation}
                   placeholder={t.routeDetails.destinationStation}
                   searchPlaceholder="Search destination..."
-                  label={language === 'en' ? '🎯 Destination Station' : '🎯 गंतव्य स्टेशन'}
+                  label={language === 'en' ? 'Destination Station' : 'गंतव्य स्टेशन'}
                 />
               </div>
 
               {/* Ticket Type Options */}
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '8px' }}>
+              <div style={{ marginBottom: '18px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--metro-navy)', marginBottom: '6px' }}>
                   {language === 'en' ? 'Ticket Type' : 'टिकट का प्रकार'}
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                   <button
                     type="button"
                     onClick={() => {
@@ -295,19 +290,19 @@ export default function TicketsPage() {
                       if (passengers > 1) setPassengers(1);
                     }}
                     style={{
-                      padding: '12px 14px',
-                      borderRadius: '10px',
-                      border: `2px solid ${ticketType === 'single' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
-                      background: ticketType === 'single' ? 'rgba(0, 87, 184, 0.05)' : '#FFFFFF',
+                      padding: '10px 12px',
+                      borderRadius: '4px',
+                      border: `1.5px solid ${ticketType === 'single' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                      background: ticketType === 'single' ? '#F0F9FF' : '#FFFFFF',
                       textAlign: 'left',
                       cursor: 'pointer',
                     }}
                   >
-                    <div style={{ fontWeight: 800, color: ticketType === 'single' ? 'var(--metro-blue)' : 'var(--metro-navy)', fontSize: '0.9rem' }}>
-                      ⚡ {t.booking.singleJourney}
+                    <div style={{ fontWeight: 700, color: ticketType === 'single' ? 'var(--metro-blue)' : 'var(--metro-navy)', fontSize: '0.86rem' }}>
+                      {t.booking.singleJourney}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
-                      {language === 'en' ? 'Instant digital QR pass for 1 traveler' : '1 यात्री के लिए त्वरित क्यूआर पास'}
+                    <div style={{ fontSize: '0.74rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
+                      {language === 'en' ? 'Digital QR pass for 1 passenger' : '1 यात्री के लिए डिजिटल पास'}
                     </div>
                   </button>
 
@@ -318,18 +313,18 @@ export default function TicketsPage() {
                       if (passengers === 1) setPassengers(2);
                     }}
                     style={{
-                      padding: '12px 14px',
-                      borderRadius: '10px',
-                      border: `2px solid ${ticketType === 'group' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
-                      background: ticketType === 'group' ? 'rgba(0, 87, 184, 0.05)' : '#FFFFFF',
+                      padding: '10px 12px',
+                      borderRadius: '4px',
+                      border: `1.5px solid ${ticketType === 'group' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                      background: ticketType === 'group' ? '#F0F9FF' : '#FFFFFF',
                       textAlign: 'left',
                       cursor: 'pointer',
                     }}
                   >
-                    <div style={{ fontWeight: 800, color: ticketType === 'group' ? 'var(--metro-blue)' : 'var(--metro-navy)', fontSize: '0.9rem' }}>
-                      👥 {t.booking.groupJourney}
+                    <div style={{ fontWeight: 700, color: ticketType === 'group' ? 'var(--metro-blue)' : 'var(--metro-navy)', fontSize: '0.86rem' }}>
+                      {t.booking.groupJourney}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.74rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
                       {language === 'en' ? 'Unified QR ticket for 2 to 6 passengers' : '2 से 6 यात्रियों के लिए संयुक्त टिकट'}
                     </div>
                   </button>
@@ -337,11 +332,11 @@ export default function TicketsPage() {
               </div>
 
               {/* Passengers Count Selector */}
-              <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--metro-navy)', marginBottom: '8px' }}>
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--metro-navy)', marginBottom: '6px' }}>
                   {t.booking.passengers}
                 </label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                   {[1, 2, 3, 4, 5, 6].map((num) => {
                     const isSelected = passengers === num;
                     return (
@@ -355,20 +350,20 @@ export default function TicketsPage() {
                         }}
                         style={{
                           flex: 1,
-                          minWidth: '45px',
-                          padding: '10px 0',
+                          minWidth: '40px',
+                          padding: '8px 0',
                           textAlign: 'center',
-                          borderRadius: '8px',
-                          border: `2px solid ${isSelected ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                          borderRadius: '4px',
+                          border: `1.5px solid ${isSelected ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
                           background: isSelected ? 'var(--metro-blue)' : '#FFFFFF',
                           color: isSelected ? '#FFFFFF' : 'var(--metro-navy)',
-                          fontWeight: 800,
-                          fontSize: '0.95rem',
+                          fontWeight: 600,
+                          fontSize: '0.88rem',
                           cursor: 'pointer',
                           transition: 'all 0.15s ease',
                         }}
                       >
-                        {num} {num === 1 ? (language === 'en' ? 'Pax' : 'यात्री') : (language === 'en' ? 'Pax' : 'यात्री')}
+                        {num} Pax
                       </button>
                     );
                   })}
@@ -378,21 +373,18 @@ export default function TicketsPage() {
               {/* Proceed CTA Button */}
               <button
                 type="button"
-                className="button"
+                className="btn-ticket"
                 onClick={handleBookNow}
                 disabled={!sourceStation || !destinationStation}
                 style={{
                   width: '100%',
-                  padding: '14px',
-                  fontSize: '1.08rem',
-                  fontWeight: 800,
+                  padding: '12px',
+                  fontSize: '0.95rem',
                   opacity: (!sourceStation || !destinationStation) ? 0.6 : 1,
                   cursor: (!sourceStation || !destinationStation) ? 'not-allowed' : 'pointer',
-                  background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
-                  borderColor: '#059669',
                 }}
               >
-                🎫 {language === 'en' ? `Proceed to Buy Ticket • ₹${totalAmount}` : `टिकट खरीदने के लिए आगे बढ़ें • ₹${totalAmount}`}
+                <TicketIcon size={16} /> {language === 'en' ? `Proceed to Issue Ticket • ₹${totalAmount}` : `टिकट जारी करने के लिए आगे बढ़ें • ₹${totalAmount}`}
               </button>
             </div>
 
@@ -401,18 +393,19 @@ export default function TicketsPage() {
               <div
                 className="card"
                 style={{
-                  border: '2px solid rgba(11, 31, 58, 0.1)',
+                  border: '1px solid var(--metro-card-border)',
+                  borderTop: '3px solid var(--metro-blue)',
                   background: '#FFFFFF',
                   position: 'sticky',
                   top: '90px',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--metro-card-border)', paddingBottom: '12px', marginBottom: '16px' }}>
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
-                    🧾 {language === 'en' ? 'Fare & Route Estimate' : 'किराया और मार्ग अनुमान'}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--metro-card-border)', paddingBottom: '10px', marginBottom: '14px' }}>
+                  <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
+                    {language === 'en' ? 'Fare & Route Estimate' : 'किराया और मार्ग अनुमान'}
                   </h3>
-                  <span style={{ fontSize: '0.75rem', padding: '2px 8px', borderRadius: '12px', background: '#DCFCE7', color: '#166534', fontWeight: 800 }}>
-                    ✓ Dynamic Calc
+                  <span style={{ fontSize: '0.72rem', padding: '2px 8px', borderRadius: '4px', background: '#F1F5F9', color: '#334155', fontWeight: 600 }}>
+                    Official Schedule
                   </span>
                 </div>
 
@@ -474,11 +467,11 @@ export default function TicketsPage() {
                 </div>
 
                 {/* Total */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
-                  <span style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--metro-navy)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <span style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--metro-navy)' }}>
                     {t.booking.totalAmount}
                   </span>
-                  <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--metro-green)' }}>
+                  <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#047857' }}>
                     ₹{totalAmount}
                   </span>
                 </div>
@@ -486,15 +479,15 @@ export default function TicketsPage() {
                 {/* Features checklist */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.78rem', color: 'var(--metro-text-muted)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
+                    <span style={{ color: '#047857', fontWeight: 700 }}>•</span>
                     <span>{language === 'en' ? 'Valid for 180 mins from entry gate' : 'प्रवेश द्वार से 180 मिनट के लिए वैध'}</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
+                    <span style={{ color: '#047857', fontWeight: 700 }}>•</span>
                     <span>{language === 'en' ? 'Simulated UPI & Card payment options' : 'सिमुलेटेड यूपीआई और कार्ड भुगतान'}</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>
+                    <span style={{ color: '#047857', fontWeight: 700 }}>•</span>
                     <span>{language === 'en' ? 'Instant SVG QR generation & receipt download' : 'त्वरित क्यूआर कोड और रसीद डाउनलोड'}</span>
                   </div>
                 </div>
@@ -508,7 +501,7 @@ export default function TicketsPage() {
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
               <div>
-                <h2 style={{ margin: 0, fontSize: '1.35rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
+                <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
                   {t.profile.myTickets}
                 </h2>
                 <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: 'var(--metro-text-subtle)' }}>
@@ -523,9 +516,9 @@ export default function TicketsPage() {
                   type="button"
                   className="btn-outline"
                   onClick={() => setActiveTab('book')}
-                  style={{ fontSize: '0.85rem', padding: '8px 16px' }}
+                  style={{ fontSize: '0.82rem', padding: '6px 14px' }}
                 >
-                  ＋ {language === 'en' ? 'Book Another Ticket' : 'एक और टिकट बुक करें'}
+                  {language === 'en' ? '+ Book Another Ticket' : '+ एक और टिकट बुक करें'}
                 </button>
               )}
             </div>
@@ -535,31 +528,33 @@ export default function TicketsPage() {
                 className="card"
                 style={{
                   textAlign: 'center',
-                  padding: '48px 20px',
-                  border: '2px dashed var(--metro-card-border)',
+                  padding: '40px 20px',
+                  border: '1px dashed var(--metro-card-border)',
                   background: '#FFFFFF',
                 }}
               >
-                <div style={{ fontSize: '3rem', marginBottom: '12px' }}>🎫</div>
-                <h3 style={{ margin: '0 0 8px', fontSize: '1.2rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+                  <TicketIcon size={36} color="#64748B" />
+                </div>
+                <h3 style={{ margin: '0 0 6px', fontSize: '1.1rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
                   {t.profile.noTickets}
                 </h3>
-                <p style={{ color: 'var(--metro-text-subtle)', fontSize: '0.9rem', maxWidth: '440px', margin: '0 auto 20px' }}>
+                <p style={{ color: 'var(--metro-text-subtle)', fontSize: '0.88rem', maxWidth: '440px', margin: '0 auto 18px' }}>
                   {language === 'en'
                     ? 'You have not booked any metro tickets yet. Select your origin and destination to generate your first ticket pass!'
                     : 'आपने अभी तक कोई मेट्रो टिकट बुक नहीं किया है। अपना पहला टिकट बनाने के लिए ऊपर अपना मार्ग चुनें!'}
                 </p>
                 <button
                   type="button"
-                  className="btn-primary"
+                  className="btn-ticket"
                   onClick={() => setActiveTab('book')}
-                  style={{ padding: '12px 24px', fontSize: '0.95rem' }}
+                  style={{ padding: '10px 20px', fontSize: '0.9rem' }}
                 >
-                  🎫 {language === 'en' ? 'Book Metro Ticket Now' : 'अभी मेट्रो टिकट बुक करें'}
+                  <TicketIcon size={16} /> {language === 'en' ? 'Book Metro Ticket Now' : 'अभी मेट्रो टिकट बुक करें'}
                 </button>
               </div>
             ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '14px' }}>
                 {bookedTickets.map((tkt) => {
                   const dateStr = new Date(tkt.timestamp).toLocaleDateString('en-IN', {
                     day: '2-digit',
@@ -574,52 +569,52 @@ export default function TicketsPage() {
                       key={tkt.id}
                       className="card"
                       style={{
-                        border: '2px solid rgba(0, 87, 184, 0.15)',
-                        borderRadius: '14px',
+                        border: '1px solid var(--metro-card-border)',
+                        borderTop: '3px solid var(--metro-blue)',
+                        borderRadius: '6px',
                         background: '#FFFFFF',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
-                        boxShadow: '0 4px 14px rgba(11, 31, 58, 0.06)',
                       }}
                     >
                       <div>
                         {/* Header Row */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#0369A1', background: '#E0F2FE', padding: '3px 8px', borderRadius: '8px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                          <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#0F172A', background: '#F1F5F9', padding: '2px 8px', borderRadius: '4px' }}>
                             {tkt.ticketType || 'Single Journey'}
                           </span>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', fontWeight: 600 }}>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-subtle)', fontWeight: 500 }}>
                             {dateStr}
                           </span>
                         </div>
 
                         {/* Route Title */}
-                        <h4 style={{ margin: '0 0 6px', fontSize: '1.05rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
+                        <h4 style={{ margin: '0 0 4px', fontSize: '1rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
                           {tkt.sourceStationName} ➔ {tkt.destinationStationName}
                         </h4>
 
                         {/* Ticket ID */}
-                        <div style={{ fontSize: '0.78rem', color: 'var(--metro-text-subtle)', fontFamily: 'monospace', marginBottom: '14px' }}>
+                        <div style={{ fontSize: '0.74rem', color: 'var(--metro-text-subtle)', fontFamily: 'monospace', marginBottom: '12px' }}>
                           {tkt.id}
                         </div>
 
                         {/* Details */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--metro-light-bg)', padding: '10px 12px', borderRadius: '8px', marginBottom: '14px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#F8FAFC', padding: '8px 12px', borderRadius: '4px', marginBottom: '12px', border: '1px solid var(--metro-card-border)' }}>
                           <div>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-subtle)', display: 'block' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--metro-text-subtle)', display: 'block' }}>
                               {language === 'en' ? 'PASSENGERS' : 'यात्री'}
                             </span>
-                            <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
-                              {tkt.passengers} {tkt.passengers > 1 ? 'Pax' : 'Pax'}
+                            <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
+                              {tkt.passengers} Pax
                             </strong>
                           </div>
 
                           <div style={{ textAlign: 'right' }}>
-                            <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-subtle)', display: 'block' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--metro-text-subtle)', display: 'block' }}>
                               {language === 'en' ? 'FARE PAID' : 'किराया'}
                             </span>
-                            <strong style={{ fontSize: '1.1rem', color: 'var(--metro-green)', fontWeight: 800 }}>
+                            <strong style={{ fontSize: '1rem', color: '#047857', fontWeight: 700 }}>
                               ₹{tkt.fare}
                             </strong>
                           </div>
@@ -633,15 +628,15 @@ export default function TicketsPage() {
                         onClick={() => setViewingTicket(tkt)}
                         style={{
                           width: '100%',
-                          fontSize: '0.85rem',
-                          padding: '10px',
+                          fontSize: '0.84rem',
+                          padding: '8px',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: '6px',
                         }}
                       >
-                        📱 {language === 'en' ? 'View QR Ticket Pass' : 'क्यूआर पास देखें'}
+                        <TicketIcon size={14} /> {language === 'en' ? 'View QR Ticket Pass' : 'क्यूआर पास देखें'}
                       </button>
                     </div>
                   );
@@ -727,8 +722,8 @@ export default function TicketsPage() {
                   marginBottom: '16px',
                 }}
               >
-                <span style={{ fontSize: '0.72rem', background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: '12px', fontWeight: 800, textTransform: 'uppercase' }}>
-                  ✓ ACTIVE DIGITAL TRANSIT PASS
+                <span style={{ fontSize: '0.72rem', background: '#DCFCE7', color: '#166534', padding: '3px 8px', borderRadius: '4px', fontWeight: 800, textTransform: 'uppercase' }}>
+                  ACTIVE DIGITAL TRANSIT PASS
                 </span>
 
                 {/* SVG QR Code Simulation */}
@@ -787,7 +782,7 @@ export default function TicketsPage() {
                   onClick={() => window.print()}
                   style={{ flex: 1, padding: '10px', fontSize: '0.88rem' }}
                 >
-                  🖨️ {t.booking.printBtn}
+                  {t.booking.printBtn}
                 </button>
                 <button
                   type="button"

@@ -204,35 +204,35 @@ export default function TicketBooking({
 
         {/* STEP 1: Ticket Details & Passenger Selection */}
         {step === 1 && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {/* Journey Details Summary Card */}
             <div
               style={{
-                background: 'var(--metro-light-bg)',
+                background: '#F8FAFC',
                 padding: '16px',
-                borderRadius: '14px',
+                borderRadius: '6px',
                 border: '1px solid var(--metro-card-border)',
               }}
             >
-              <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--metro-blue)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
-                📍 {t.booking.journeySummary}
+              <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--metro-blue)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+                {t.booking.journeySummary}
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <div>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-muted)', display: 'block' }}>FROM</span>
-                  <span style={{ fontWeight: 800, color: 'var(--metro-navy)', fontSize: '1rem' }}>{sourceStationName}</span>
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--metro-blue)', fontWeight: 600 }}>{sourceNetwork}</span>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--metro-text-subtle)', display: 'block' }}>FROM (ORIGIN)</span>
+                  <span style={{ fontWeight: 700, color: 'var(--metro-navy)', fontSize: '0.95rem' }}>{sourceStationName}</span>
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--metro-blue)', fontWeight: 600 }}>{sourceNetwork}</span>
                 </div>
-                <div style={{ fontSize: '1.2rem', color: 'var(--metro-blue)', fontWeight: 800, padding: '0 8px' }}>➔</div>
+                <div style={{ fontSize: '1rem', color: '#64748B', fontWeight: 600, padding: '0 8px' }}>➔</div>
                 <div style={{ textAlign: 'right' }}>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-muted)', display: 'block' }}>TO</span>
-                  <span style={{ fontWeight: 800, color: 'var(--metro-navy)', fontSize: '1rem' }}>{destinationStationName}</span>
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--metro-blue)', fontWeight: 600 }}>{destNetwork}</span>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--metro-text-subtle)', display: 'block' }}>TO (DESTINATION)</span>
+                  <span style={{ fontWeight: 700, color: 'var(--metro-navy)', fontSize: '0.95rem' }}>{destinationStationName}</span>
+                  <span style={{ display: 'block', fontSize: '0.72rem', color: 'var(--metro-blue)', fontWeight: 600 }}>{destNetwork}</span>
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', paddingTop: '10px', borderTop: '1px dashed var(--metro-card-border)', fontSize: '0.8rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', paddingTop: '10px', borderTop: '1px solid var(--metro-card-border)', fontSize: '0.78rem' }}>
                 <div>
                   <span style={{ color: 'var(--metro-text-subtle)', display: 'block' }}>Interchanges:</span>
                   <strong style={{ color: 'var(--metro-navy)' }}>{interchanges}</strong>
@@ -243,14 +243,14 @@ export default function TicketBooking({
                 </div>
                 <div>
                   <span style={{ color: 'var(--metro-text-subtle)', display: 'block' }}>Base Fare:</span>
-                  <strong style={{ color: 'var(--metro-green)' }}>₹ {fare}</strong>
+                  <strong style={{ color: '#047857' }}>₹ {fare}</strong>
                 </div>
               </div>
             </div>
 
             {/* Ticket Type */}
             <div>
-              <label style={{ marginBottom: '8px', display: 'block', fontSize: '0.88rem', fontWeight: 800, color: 'var(--metro-navy)' }}>
+              <label style={{ marginBottom: '6px', display: 'block', fontSize: '0.84rem', fontWeight: 700, color: 'var(--metro-navy)' }}>
                 {t.booking.ticketType}
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
@@ -261,18 +261,18 @@ export default function TicketBooking({
                     setPassengers(1);
                   }}
                   style={{
-                    padding: '12px',
-                    borderRadius: '10px',
-                    border: '2px solid var(--metro-blue)',
-                    background: ticketType === 'single' ? 'var(--metro-blue)' : '#FFFFFF',
-                    color: ticketType === 'single' ? '#FFFFFF' : 'var(--metro-navy)',
-                    fontWeight: 800,
-                    fontSize: '0.88rem',
+                    padding: '10px 12px',
+                    borderRadius: '4px',
+                    border: `1.5px solid ${ticketType === 'single' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                    background: ticketType === 'single' ? '#F0F9FF' : '#FFFFFF',
+                    color: ticketType === 'single' ? 'var(--metro-blue)' : 'var(--metro-navy)',
+                    fontWeight: 600,
+                    fontSize: '0.86rem',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
+                    transition: 'all 0.15s ease',
                   }}
                 >
-                  🎟️ {t.booking.singleJourney}
+                  {t.booking.singleJourney}
                 </button>
                 <button
                   type="button"
@@ -281,33 +281,33 @@ export default function TicketBooking({
                     if (passengers === 1) setPassengers(2);
                   }}
                   style={{
-                    padding: '12px',
-                    borderRadius: '10px',
-                    border: '2px solid var(--metro-blue)',
-                    background: ticketType === 'group' ? 'var(--metro-blue)' : '#FFFFFF',
-                    color: ticketType === 'group' ? '#FFFFFF' : 'var(--metro-navy)',
-                    fontWeight: 800,
-                    fontSize: '0.88rem',
+                    padding: '10px 12px',
+                    borderRadius: '4px',
+                    border: `1.5px solid ${ticketType === 'group' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                    background: ticketType === 'group' ? '#F0F9FF' : '#FFFFFF',
+                    color: ticketType === 'group' ? 'var(--metro-blue)' : 'var(--metro-navy)',
+                    fontWeight: 600,
+                    fontSize: '0.86rem',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
+                    transition: 'all 0.15s ease',
                   }}
                 >
-                  👥 {t.booking.groupJourney}
+                  {t.booking.groupJourney}
                 </button>
               </div>
             </div>
 
             {/* Passenger Selection */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <label style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--metro-navy)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <label style={{ fontSize: '0.84rem', fontWeight: 700, color: 'var(--metro-navy)' }}>
                   {t.booking.passengers}
                 </label>
-                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--metro-blue)' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--metro-blue)' }}>
                   {passengers} {language === 'en' ? (passengers === 1 ? 'Passenger' : 'Passengers') : 'यात्री'}
                 </span>
               </div>
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', gap: '6px', justifyContent: 'space-between' }}>
                 {[1, 2, 3, 4, 5, 6].map((num) => (
                   <button
                     key={num}
@@ -319,13 +319,13 @@ export default function TicketBooking({
                     }}
                     style={{
                       flex: 1,
-                      padding: '10px 0',
-                      borderRadius: '8px',
-                      border: '2px solid var(--metro-blue)',
+                      padding: '8px 0',
+                      borderRadius: '4px',
+                      border: `1.5px solid ${passengers === num ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
                       background: passengers === num ? 'var(--metro-blue)' : '#FFFFFF',
                       color: passengers === num ? '#FFFFFF' : 'var(--metro-navy)',
-                      fontWeight: 800,
-                      fontSize: '0.95rem',
+                      fontWeight: 600,
+                      fontSize: '0.9rem',
                       cursor: 'pointer',
                     }}
                   >
@@ -341,27 +341,27 @@ export default function TicketBooking({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                padding: '14px 18px',
-                background: '#ECFDF5',
-                borderRadius: '12px',
-                border: '1px solid #10B981',
+                padding: '12px 16px',
+                background: '#F0FDF4',
+                borderRadius: '6px',
+                border: '1px solid #BBF7D0',
               }}
             >
               <div>
-                <div style={{ fontSize: '0.8rem', color: '#065F46', fontWeight: 600 }}>{t.booking.totalAmount}:</div>
-                <div style={{ fontSize: '0.78rem', color: '#047857' }}>
-                  ₹ {fare} × {passengers} {passengers === 1 ? 'Pax' : 'Pax'}
+                <div style={{ fontSize: '0.78rem', color: '#166534', fontWeight: 600 }}>{t.booking.totalAmount}:</div>
+                <div style={{ fontSize: '0.74rem', color: '#15803D' }}>
+                  ₹ {fare} × {passengers} Pax
                 </div>
               </div>
-              <div style={{ fontSize: '1.6rem', fontWeight: 900, color: '#047857' }}>
+              <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#166534' }}>
                 ₹ {totalFare}
               </div>
             </div>
 
             <button
-              className="btn-primary"
+              className="btn-ticket"
               onClick={() => setStep(2)}
-              style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
+              style={{ width: '100%', padding: '12px', fontSize: '0.95rem' }}
             >
               {t.booking.proceedPayment} (₹ {totalFare}) ➔
             </button>
@@ -370,9 +370,9 @@ export default function TicketBooking({
 
         {/* STEP 2: Simulated Payment Screen */}
         {step === 2 && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-              <label style={{ marginBottom: '10px', display: 'block', fontSize: '0.88rem', fontWeight: 800, color: 'var(--metro-navy)' }}>
+              <label style={{ marginBottom: '8px', display: 'block', fontSize: '0.84rem', fontWeight: 700, color: 'var(--metro-navy)' }}>
                 {t.booking.selectPayment}
               </label>
 
@@ -382,49 +382,49 @@ export default function TicketBooking({
                   type="button"
                   onClick={() => setPaymentMethod('upi')}
                   style={{
-                    padding: '10px 4px',
-                    borderRadius: '8px',
-                    border: '2px solid var(--metro-blue)',
-                    background: paymentMethod === 'upi' ? 'var(--metro-blue)' : '#FFFFFF',
-                    color: paymentMethod === 'upi' ? '#FFFFFF' : 'var(--metro-navy)',
-                    fontWeight: 700,
-                    fontSize: '0.78rem',
+                    padding: '8px 4px',
+                    borderRadius: '4px',
+                    border: `1.5px solid ${paymentMethod === 'upi' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                    background: paymentMethod === 'upi' ? '#F0F9FF' : '#FFFFFF',
+                    color: paymentMethod === 'upi' ? 'var(--metro-blue)' : 'var(--metro-navy)',
+                    fontWeight: 600,
+                    fontSize: '0.82rem',
                     cursor: 'pointer',
                   }}
                 >
-                  ⚡ UPI
+                  UPI
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('card')}
                   style={{
-                    padding: '10px 4px',
-                    borderRadius: '8px',
-                    border: '2px solid var(--metro-blue)',
-                    background: paymentMethod === 'card' ? 'var(--metro-blue)' : '#FFFFFF',
-                    color: paymentMethod === 'card' ? '#FFFFFF' : 'var(--metro-navy)',
-                    fontWeight: 700,
-                    fontSize: '0.78rem',
+                    padding: '8px 4px',
+                    borderRadius: '4px',
+                    border: `1.5px solid ${paymentMethod === 'card' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                    background: paymentMethod === 'card' ? '#F0F9FF' : '#FFFFFF',
+                    color: paymentMethod === 'card' ? 'var(--metro-blue)' : 'var(--metro-navy)',
+                    fontWeight: 600,
+                    fontSize: '0.82rem',
                     cursor: 'pointer',
                   }}
                 >
-                  💳 Card
+                  Debit / Credit Card
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('netbanking')}
                   style={{
-                    padding: '10px 4px',
-                    borderRadius: '8px',
-                    border: '2px solid var(--metro-blue)',
-                    background: paymentMethod === 'netbanking' ? 'var(--metro-blue)' : '#FFFFFF',
-                    color: paymentMethod === 'netbanking' ? '#FFFFFF' : 'var(--metro-navy)',
-                    fontWeight: 700,
-                    fontSize: '0.78rem',
+                    padding: '8px 4px',
+                    borderRadius: '4px',
+                    border: `1.5px solid ${paymentMethod === 'netbanking' ? 'var(--metro-blue)' : 'var(--metro-card-border)'}`,
+                    background: paymentMethod === 'netbanking' ? '#F0F9FF' : '#FFFFFF',
+                    color: paymentMethod === 'netbanking' ? 'var(--metro-blue)' : 'var(--metro-navy)',
+                    fontWeight: 600,
+                    fontSize: '0.82rem',
                     cursor: 'pointer',
                   }}
                 >
-                  🏦 NetBanking
+                  NetBanking
                 </button>
               </div>
 
@@ -582,51 +582,50 @@ export default function TicketBooking({
               id="digital-metro-ticket"
               style={{
                 width: '100%',
-                background: 'linear-gradient(135deg, var(--metro-navy) 0%, #0F2942 100%)',
-                color: '#FFFFFF',
-                borderRadius: '18px',
-                padding: '24px',
-                boxShadow: '0 16px 36px rgba(11, 31, 58, 0.35)',
-                border: '2px solid var(--metro-blue)',
+                background: '#FFFFFF',
+                color: '#0F172A',
+                borderRadius: '8px',
+                padding: '20px',
+                border: '2px solid #CBD5E1',
+                borderTop: '6px solid var(--metro-blue)',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
                 position: 'relative',
-                overflow: 'hidden',
               }}
             >
               {/* Ticket Top Branding */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', borderBottom: '1px rgba(255,255,255,0.15) solid', paddingBottom: '12px' }}>
-                <MetroSathiLogo size="sm" variant="light" />
-                <span className="demo-notice-badge" style={{ fontSize: '0.68rem', backgroundColor: '#D97706', color: '#FFFFFF' }}>
-                  DEMO TICKET
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', borderBottom: '1px solid #E2E8F0', paddingBottom: '10px' }}>
+                <MetroSathiLogo size="sm" variant="dark" />
+                <span className="demo-notice-badge" style={{ fontSize: '0.68rem', backgroundColor: '#F1F5F9', color: '#475569' }}>
+                  ELECTRONIC TRANSIT PASS
                 </span>
               </div>
 
               {/* Main Ticket Journey Segment */}
               <div
                 style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  backdropFilter: 'blur(4px)',
-                  borderRadius: '12px',
-                  padding: '16px',
-                  marginBottom: '16px',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  background: '#F8FAFC',
+                  borderRadius: '6px',
+                  padding: '14px',
+                  marginBottom: '14px',
+                  border: '1px solid #E2E8F0',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ flex: 1 }}>
-                    <span style={{ fontSize: '0.7rem', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>ORIGIN</span>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>{sourceStationName}</div>
-                    <span style={{ fontSize: '0.72rem', color: '#38BDF8', fontWeight: 700 }}>{sourceNetwork}</span>
+                    <span style={{ fontSize: '0.68rem', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px' }}>ORIGIN</span>
+                    <div style={{ fontSize: '1rem', fontWeight: 700, color: '#0F172A', marginTop: '2px' }}>{sourceStationName}</div>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--metro-blue)', fontWeight: 600 }}>{sourceNetwork}</span>
                   </div>
 
                   <div style={{ textAlign: 'center', padding: '0 12px' }}>
-                    <div style={{ fontSize: '1.2rem', color: '#38BDF8' }}>➔</div>
-                    <span style={{ fontSize: '0.68rem', color: '#CBD5E1' }}>Single Journey</span>
+                    <div style={{ fontSize: '1rem', color: '#64748B' }}>➔</div>
+                    <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Transit Pass</span>
                   </div>
 
                   <div style={{ flex: 1, textAlign: 'right' }}>
-                    <span style={{ fontSize: '0.7rem', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>DESTINATION</span>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 900, color: '#FFFFFF', marginTop: '2px' }}>{destinationStationName}</div>
-                    <span style={{ fontSize: '0.72rem', color: '#38BDF8', fontWeight: 700 }}>{destNetwork}</span>
+                    <span style={{ fontSize: '0.68rem', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px' }}>DESTINATION</span>
+                    <div style={{ fontSize: '1rem', fontWeight: 700, color: '#0F172A', marginTop: '2px' }}>{destinationStationName}</div>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--metro-blue)', fontWeight: 600 }}>{destNetwork}</span>
                   </div>
                 </div>
               </div>
@@ -635,22 +634,22 @@ export default function TicketBooking({
               <div
                 style={{
                   background: '#FFFFFF',
-                  borderRadius: '14px',
-                  padding: '16px',
+                  borderRadius: '6px',
+                  padding: '12px',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                  marginBottom: '16px',
+                  border: '1px solid #E2E8F0',
+                  marginBottom: '14px',
                 }}
               >
-                <svg width="130" height="130" viewBox="0 0 120 120" style={{ fill: 'var(--metro-navy)' }}>
+                <svg width="130" height="130" viewBox="0 0 120 120" style={{ fill: '#0F172A' }}>
                   <path d={qrSvgPath} />
                 </svg>
-                <div style={{ fontSize: '0.72rem', color: 'var(--metro-navy)', fontWeight: 800, marginTop: '8px', letterSpacing: '1px' }}>
+                <div style={{ fontSize: '0.75rem', color: '#0F172A', fontWeight: 700, marginTop: '8px', letterSpacing: '0.5px', fontFamily: 'monospace' }}>
                   {ticketId}
                 </div>
-                <span style={{ fontSize: '0.68rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
+                <span style={{ fontSize: '0.7rem', color: '#64748B', marginTop: '2px' }}>
                   {t.booking.qrDescription}
                 </span>
               </div>
@@ -660,34 +659,34 @@ export default function TicketBooking({
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
-                  gap: '10px',
-                  fontSize: '0.82rem',
-                  background: 'rgba(255,255,255,0.06)',
-                  padding: '14px',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  gap: '8px',
+                  fontSize: '0.8rem',
+                  background: '#F8FAFC',
+                  padding: '12px',
+                  borderRadius: '6px',
+                  border: '1px solid #E2E8F0',
                 }}
               >
                 <div>
-                  <span style={{ color: '#94A3B8', fontSize: '0.7rem', display: 'block' }}>BOOKING DATE & TIME</span>
-                  <strong style={{ color: '#FFFFFF' }}>{bookingTime}</strong>
+                  <span style={{ color: '#64748B', fontSize: '0.68rem', display: 'block' }}>BOOKING DATE & TIME</span>
+                  <strong style={{ color: '#0F172A' }}>{bookingTime}</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#94A3B8', fontSize: '0.7rem', display: 'block' }}>PASSENGERS</span>
-                  <strong style={{ color: '#FFFFFF' }}>{passengers} Person(s)</strong>
+                  <span style={{ color: '#64748B', fontSize: '0.68rem', display: 'block' }}>PASSENGERS</span>
+                  <strong style={{ color: '#0F172A' }}>{passengers} Person(s)</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#94A3B8', fontSize: '0.7rem', display: 'block' }}>TOTAL FARE PAID</span>
-                  <strong style={{ color: '#4ADE80', fontSize: '1rem' }}>₹ {totalFare}</strong>
+                  <span style={{ color: '#64748B', fontSize: '0.68rem', display: 'block' }}>TOTAL FARE PAID</span>
+                  <strong style={{ color: '#047857', fontSize: '0.95rem' }}>₹ {totalFare}</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#94A3B8', fontSize: '0.7rem', display: 'block' }}>STATUS</span>
-                  <strong style={{ color: '#38BDF8' }}>VALID FOR ENTRY</strong>
+                  <span style={{ color: '#64748B', fontSize: '0.68rem', display: 'block' }}>STATUS</span>
+                  <strong style={{ color: '#047857' }}>VALID FOR ENTRY</strong>
                 </div>
               </div>
 
               {/* Security Watermark & Demo Notice */}
-              <div style={{ marginTop: '14px', textAlign: 'center', fontSize: '0.7rem', color: '#FCD34D', fontStyle: 'italic' }}>
+              <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '0.68rem', color: '#64748B' }}>
                 {t.booking.demoNotice}
               </div>
             </div>

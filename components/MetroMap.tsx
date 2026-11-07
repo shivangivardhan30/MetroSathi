@@ -372,19 +372,19 @@ export default function MetroMap({ language }: MetroMapProps) {
         className="card"
         style={{
           padding: '16px 20px',
-          border: '2px solid rgba(0, 87, 184, 0.2)',
-          boxShadow: '0 4px 16px rgba(11, 31, 58, 0.06)'
+          border: '1px solid var(--metro-card-border)',
+          borderTop: '3px solid var(--metro-blue)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '14px' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, color: 'var(--metro-navy)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>🗺️</span> {language === 'en' ? 'Interactive Schematic Metro Map' : 'इंटरैक्टिव योजनाबद्ध मेट्रो मानचित्र'}
+            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--metro-navy)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {language === 'en' ? 'Schematic Metro Transit Map' : 'योजनाबद्ध मेट्रो मानचित्र'}
             </h2>
-            <div style={{ fontSize: '0.85rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--metro-text-subtle)', marginTop: '2px' }}>
               {language === 'en'
-                ? 'High-contrast transit network diagram with line isolation and route highlighting'
-                : 'लाइन पृथक्करण और मार्ग हाइलाइटिंग के साथ उच्च-कंट्रास्ट मेट्रो नेटवर्क'}
+                ? 'Transit network diagram with line isolation and route highlighting'
+                : 'लाइन पृथक्करण और मार्ग हाइलाइटिंग के साथ मेट्रो नेटवर्क'}
             </div>
           </div>
 
@@ -393,11 +393,11 @@ export default function MetroMap({ language }: MetroMapProps) {
               type="button"
               className={routeMode ? 'btn-primary' : 'btn-outline'}
               onClick={() => setRouteMode(!routeMode)}
-              style={{ fontSize: '0.85rem', padding: '8px 16px' }}
+              style={{ fontSize: '0.82rem', padding: '6px 14px' }}
             >
               {routeMode
-                ? (language === 'en' ? '✕ Exit Route Mode' : '✕ रूट मोड बंद करें')
-                : (language === 'en' ? '📍 Plan Route on Map' : '📍 मानचित्र पर मार्ग खोजें')}
+                ? (language === 'en' ? 'Exit Route Mode' : 'रूट मोड बंद करें')
+                : (language === 'en' ? 'Plan Route on Map' : 'मानचित्र पर मार्ग खोजें')}
             </button>
           </div>
         </div>
@@ -557,16 +557,17 @@ export default function MetroMap({ language }: MetroMapProps) {
       {activeRoute && (
         <div
           style={{
-            background: 'linear-gradient(135deg, var(--metro-navy) 0%, #0F2942 100%)',
+            background: '#0F172A',
             color: '#FFFFFF',
-            padding: '16px 20px',
-            borderRadius: '14px',
+            padding: '14px 18px',
+            borderRadius: '6px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: '12px',
-            border: '2px solid var(--metro-blue)'
+            border: '1px solid #334155',
+            borderLeft: '4px solid var(--metro-blue)',
           }}
         >
           <div>
@@ -584,19 +585,17 @@ export default function MetroMap({ language }: MetroMapProps) {
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <button
               type="button"
-              className="btn-primary"
+              className="btn-ticket"
               onClick={() => router.push(`/tickets?src=${sourceStationId}&dest=${destStationId}`)}
               style={{
                 padding: '10px 18px',
                 fontSize: '0.88rem',
-                background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
-                borderColor: '#059669',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
               }}
             >
-              <span>🎫</span> {language === 'en' ? `Buy Ticket (₹${activeRoute.totalFare})` : `टिकट खरीदें (₹${activeRoute.totalFare})`}
+              {language === 'en' ? `Buy Ticket (₹${activeRoute.totalFare})` : `टिकट खरीदें (₹${activeRoute.totalFare})`}
             </button>
             <button
               type="button"
@@ -731,7 +730,7 @@ export default function MetroMap({ language }: MetroMapProps) {
                       fill="#92400E"
                       textAnchor="middle"
                     >
-                      🚶 300m Walk
+                      Transfer Walk (300m)
                     </text>
                   </g>
                 );
@@ -870,13 +869,13 @@ export default function MetroMap({ language }: MetroMapProps) {
               top: '16px',
               left: '50%',
               transform: 'translateX(-50%)',
-              background: 'rgba(11, 31, 58, 0.95)',
+              background: '#0F172A',
               color: '#FFFFFF',
-              padding: '8px 16px',
-              borderRadius: '20px',
+              padding: '6px 14px',
+              borderRadius: '4px',
               fontSize: '0.82rem',
-              fontWeight: 700,
-              boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+              fontWeight: 600,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               pointerEvents: 'none',
               zIndex: 20,
               display: 'flex',
@@ -884,10 +883,10 @@ export default function MetroMap({ language }: MetroMapProps) {
               gap: '8px'
             }}
           >
-            <span>📍 {hoveredStation.name}</span>
+            <span>{hoveredStation.name}</span>
             <span>•</span>
-            <span style={{ color: hoveredStation.lineColor || '#38BDF8' }}>{hoveredStation.line}</span>
-            {hoveredStation.isInterchange && <span>⚡ (Interchange)</span>}
+            <span style={{ color: hoveredStation.lineColor || '#94A3B8' }}>{hoveredStation.line}</span>
+            {hoveredStation.isInterchange && <span>(Interchange)</span>}
           </div>
         )}
 
@@ -976,15 +975,15 @@ export default function MetroMap({ language }: MetroMapProps) {
                   {selectedStation.network} • {selectedStation.line}
                 </span>
                 {selectedStation.isInterchange && (
-                  <span style={{ fontSize: '0.75rem', padding: '2px 8px', borderRadius: '12px', background: '#F3E8FF', color: '#6B21A8', fontWeight: 800 }}>
-                    ⚡ {language === 'en' ? 'Interchange Available' : 'इंटरचेंज उपलब्ध'}
+                  <span style={{ fontSize: '0.72rem', padding: '2px 8px', borderRadius: '4px', background: '#F1F5F9', color: '#334155', fontWeight: 600, border: '1px solid #CBD5E1' }}>
+                    {language === 'en' ? 'Interchange Available' : 'इंटरचेंज उपलब्ध'}
                   </span>
                 )}
               </div>
-              <h3 style={{ margin: 0, fontSize: '1.35rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
                 {selectedStation.name} ({selectedStation.code})
               </h3>
-              <div style={{ fontSize: '0.85rem', color: 'var(--metro-text-muted)', marginTop: '4px' }}>
+              <div style={{ fontSize: '0.82rem', color: 'var(--metro-text-muted)', marginTop: '4px' }}>
                 {language === 'en' ? 'Metro Authority / Network:' : 'मेट्रो प्राधिकरण:'} <strong>{selectedStation.network}</strong>
               </div>
             </div>
@@ -992,7 +991,7 @@ export default function MetroMap({ language }: MetroMapProps) {
             <button
               type="button"
               onClick={() => setSelectedStation(null)}
-              style={{ background: 'transparent', border: 'none', fontSize: '1.3rem', cursor: 'pointer', color: 'var(--metro-text-subtle)' }}
+              style={{ background: 'transparent', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: 'var(--metro-text-subtle)' }}
               title="Close panel"
             >
               ✕
@@ -1000,37 +999,37 @@ export default function MetroMap({ language }: MetroMapProps) {
           </div>
 
           {/* Details Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '16px', background: 'var(--metro-light-bg)', padding: '14px', borderRadius: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px', marginTop: '14px', background: '#F8FAFC', padding: '12px', borderRadius: '4px', border: '1px solid var(--metro-card-border)' }}>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 600 }}>
                 {language === 'en' ? 'CONNECTING LINES' : 'कनेक्टिंग लाइनें'}
               </span>
-              <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
+              <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
                 {selectedStation.interchangeLines && selectedStation.interchangeLines.length > 0
                   ? [selectedStation.line, ...selectedStation.interchangeLines].join(', ')
                   : selectedStation.line}
               </strong>
             </div>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 600 }}>
                 {language === 'en' ? 'PLATFORM GUIDANCE' : 'प्लेटफॉर्म मार्गदर्शन'}
               </span>
-              <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
+              <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
                 {selectedStation.platformNumbers ? `Platform ${selectedStation.platformNumbers.join(', ')}` : 'Platform information unavailable'}
               </strong>
             </div>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--metro-text-subtle)', display: 'block', fontWeight: 600 }}>
                 {language === 'en' ? 'ENTRY / EXIT GATES' : 'प्रवेश / निकास द्वार'}
               </span>
-              <strong style={{ fontSize: '0.9rem', color: 'var(--metro-navy)' }}>
+              <strong style={{ fontSize: '0.88rem', color: 'var(--metro-navy)' }}>
                 {selectedStation.entryGates ? selectedStation.entryGates.join(', ') : 'Gate information unavailable'}
               </strong>
             </div>
           </div>
 
           {/* Quick Route Planning CTAs */}
-          <div style={{ display: 'flex', gap: '10px', marginTop: '16px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '14px', flexWrap: 'wrap' }}>
             <button
               type="button"
               className="btn-outline"
@@ -1040,7 +1039,7 @@ export default function MetroMap({ language }: MetroMapProps) {
               }}
               style={{ flex: 1, minWidth: '150px' }}
             >
-              🚉 {language === 'en' ? 'Set as Origin' : 'स्रोत स्टेशन बनाएं'}
+              {language === 'en' ? 'Set as Origin' : 'स्रोत स्टेशन बनाएं'}
             </button>
             <button
               type="button"
@@ -1051,26 +1050,24 @@ export default function MetroMap({ language }: MetroMapProps) {
               }}
               style={{ flex: 1, minWidth: '150px' }}
             >
-              🎯 {language === 'en' ? 'Set as Destination' : 'गंतव्य स्टेशन बनाएं'}
+              {language === 'en' ? 'Set as Destination' : 'गंतव्य स्टेशन बनाएं'}
             </button>
             {sourceStationId && destStationId ? (
               <>
                 <button
                   type="button"
-                  className="btn-primary"
+                  className="btn-ticket"
                   onClick={() => router.push(`/tickets?src=${sourceStationId}&dest=${destStationId}`)}
                   style={{
                     flex: 1,
                     minWidth: '160px',
-                    background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
-                    borderColor: '#059669',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '6px',
                   }}
                 >
-                  🎫 {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+                  {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
                 </button>
                 <button
                   type="button"
@@ -1086,9 +1083,9 @@ export default function MetroMap({ language }: MetroMapProps) {
                 type="button"
                 className="btn-outline"
                 onClick={() => router.push(`/tickets?src=${selectedStation.id}`)}
-                style={{ flex: 1, minWidth: '160px', color: '#059669', borderColor: '#059669' }}
+                style={{ flex: 1, minWidth: '160px', color: '#047857', borderColor: '#CBD5E1' }}
               >
-                🎫 {language === 'en' ? 'Buy Ticket From Here' : 'यहाँ से टिकट खरीदें'}
+                {language === 'en' ? 'Buy Ticket From Here' : 'यहाँ से टिकट खरीदें'}
               </button>
             )}
           </div>

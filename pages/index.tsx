@@ -10,6 +10,7 @@ import MetroSathiLogo from '../components/MetroSathiLogo';
 import SearchableDropdown, { DropdownOption } from '../components/SearchableDropdown';
 import LocationCard from '../components/LocationCard';
 import { availableNetworks, getAllStations, MetroStation } from '../lib/metroData';
+import { SearchIcon, TicketIcon, MapIcon, LocationIcon, TrainIcon, GateIcon, AssistantIcon } from '../components/NavIcons';
 
 export default function Home() {
   const router = useRouter();
@@ -60,37 +61,37 @@ export default function Home() {
 
   const featureCards = [
     {
-      icon: '📍',
+      icon: <LocationIcon size={24} color="#0057B8" />,
       title: t.home.feature1Title,
       desc: t.home.feature1Desc,
       link: '/journey?autoGps=1',
     },
     {
-      icon: '🗺️',
+      icon: <MapIcon size={24} color="#0057B8" />,
       title: t.home.feature2Title,
       desc: t.home.feature2Desc,
       link: '/map',
     },
     {
-      icon: '🚇',
+      icon: <TrainIcon size={24} color="#0057B8" />,
       title: t.home.feature3Title,
       desc: t.home.feature3Desc,
       link: '/journey',
     },
     {
-      icon: '🚪',
+      icon: <GateIcon size={24} color="#0057B8" />,
       title: t.home.feature4Title,
       desc: t.home.feature4Desc,
       link: '/journey',
     },
     {
-      icon: '🤖',
+      icon: <AssistantIcon size={24} color="#0057B8" />,
       title: t.home.feature5Title,
       desc: t.home.feature5Desc,
       link: '/assistant',
     },
     {
-      icon: '🎫',
+      icon: <TicketIcon size={24} color="#0057B8" />,
       title: language === 'en' ? 'Digital Ticket Booking' : 'डिजिटल टिकट बुकिंग',
       desc: language === 'en' ? 'Book metro tickets instantly with dynamic QR codes.' : 'गतिशील क्यूआर कोड के साथ तुरंत मेट्रो टिकट बुक करें।',
       link: '/tickets',
@@ -112,20 +113,13 @@ export default function Home() {
 
           <div className="hero-cta-group" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <Link href="/journey" className="button">
-              <span>🔍</span> {t.home.planJourneyBtn}
+              <SearchIcon size={16} /> {t.home.planJourneyBtn}
             </Link>
-            <Link
-              href="/tickets"
-              className="button"
-              style={{
-                background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
-                borderColor: '#059669',
-              }}
-            >
-              <span>🎫</span> {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+            <Link href="/tickets" className="btn-ticket">
+              <TicketIcon size={16} /> {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
             </Link>
             <Link href="/map" className="btn-secondary">
-              <span>🗺️</span> {language === 'en' ? 'Explore Metro Maps' : 'मानचित्र देखें'}
+              <MapIcon size={16} /> {language === 'en' ? 'Explore Network Map' : 'मानचित्र देखें'}
             </Link>
           </div>
         </div>
@@ -135,30 +129,30 @@ export default function Home() {
       <section
         className="card"
         style={{
-          marginBottom: '32px',
-          border: '2px solid rgba(0, 87, 184, 0.25)',
-          boxShadow: '0 8px 24px rgba(11, 31, 58, 0.08)',
+          marginBottom: '28px',
+          border: '1px solid var(--metro-card-border)',
+          borderTop: '3px solid var(--metro-blue)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.35rem', color: 'var(--metro-navy)', fontWeight: 800 }}>
-              {language === 'en' ? 'Where are you going?' : 'आप कहाँ जा रहे हैं?'}
+            <h2 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--metro-navy)', fontWeight: 700 }}>
+              {language === 'en' ? 'Plan Route & Station Guidance' : 'मार्ग एवं स्टेशन मार्गदर्शन योजना'}
             </h2>
             <span style={{ fontSize: '0.85rem', color: 'var(--metro-text-subtle)' }}>
-              {language === 'en' ? 'Select stations across Delhi NCR, Noida Metro & supported lines' : 'दिल्ली एनसीआर, नोएडा मेट्रो और समर्थित लाइनों में स्टेशन चुनें'}
+              {language === 'en' ? 'Direct navigation across Delhi NCR, Noida Metro & connected networks' : 'दिल्ली एनसीआर, नोएडा मेट्रो एवं संबद्ध नेटवर्क में प्रत्यक्ष नेविगेशन'}
             </span>
           </div>
 
           {/* Network Filter Selector */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--metro-navy)' }}>
+            <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--metro-navy)' }}>
               {language === 'en' ? 'Network:' : 'नेटवर्क:'}
             </span>
             <select
               value={selectedNetwork}
               onChange={(e) => setSelectedNetwork(e.target.value)}
-              style={{ padding: '6px 12px', fontSize: '0.82rem', borderRadius: '8px', border: '1px solid var(--metro-card-border)', background: '#FFFFFF', fontWeight: 700 }}
+              style={{ width: 'auto', padding: '6px 12px', fontSize: '0.82rem', borderRadius: '4px', border: '1px solid var(--metro-card-border)', background: '#FFFFFF', fontWeight: 600 }}
             >
               <option value="All">{language === 'en' ? 'All Networks' : 'सभी नेटवर्क'}</option>
               <option value="Delhi Metro">Delhi Metro (DMRC)</option>
@@ -171,14 +165,14 @@ export default function Home() {
         <LocationCard onStationSelected={handleLocationStationSelected} />
 
         {/* Inputs & Swap Row */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '12px', alignItems: 'flex-end', margin: '20px 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '12px', alignItems: 'flex-end', margin: '18px 0' }}>
           <SearchableDropdown
             options={stationOptions}
             selectedId={sourceStation}
             onChange={setSourceStation}
             placeholder={t.routeDetails.sourceStation}
             searchPlaceholder="Search e.g. Noida Sector 51, Rajiv Chowk..."
-            label={language === 'en' ? '🚉 From Station' : '🚉 से (स्रोत स्टेशन)'}
+            label={language === 'en' ? 'From Station (Origin)' : 'स्रोत स्टेशन (आरंभ)'}
           />
 
           <button
@@ -186,25 +180,25 @@ export default function Home() {
             onClick={handleSwap}
             title="Swap Stations"
             style={{
-              height: '42px',
-              width: '42px',
-              borderRadius: '50%',
-              border: '1.5px solid var(--metro-blue)',
-              background: '#FFFFFF',
-              color: 'var(--metro-blue)',
-              fontSize: '1.2rem',
-              fontWeight: 800,
+              height: '38px',
+              width: '38px',
+              borderRadius: '4px',
+              border: '1px solid var(--metro-card-border)',
+              background: '#F8FAFC',
+              color: 'var(--metro-navy)',
+              fontSize: '1rem',
+              fontWeight: 700,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               marginBottom: '2px',
-              transition: 'all 0.2s ease',
+              transition: 'all 0.15s ease',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--metro-blue)', e.currentTarget.style.color = '#FFFFFF')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF', e.currentTarget.style.color = 'var(--metro-blue)')}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E2E8F0')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#F8FAFC')}
           >
-            ⇄
+            &#8644;
           </button>
 
           <SearchableDropdown
@@ -213,39 +207,25 @@ export default function Home() {
             onChange={setDestinationStation}
             placeholder={t.routeDetails.destinationStation}
             searchPlaceholder="Search e.g. Lajpat Nagar, Pari Chowk..."
-            label={language === 'en' ? '🎯 To Station' : '🎯 तक (गंतव्य स्टेशन)'}
+            label={language === 'en' ? 'To Station (Destination)' : 'गंतव्य स्टेशन'}
           />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+        <div style={{ marginTop: '20px' }}>
           <button
             className="button"
             onClick={handleFindRoute}
-            style={{ width: '100%', padding: '14px', fontSize: '1.05rem', fontWeight: 800 }}
-          >
-            🔍 {t.home.planJourneyBtn}
-          </button>
-          <button
-            className="button"
-            onClick={() => {
-              if (sourceStation && destinationStation) {
-                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}&dest=${encodeURIComponent(destinationStation)}`);
-              } else if (sourceStation) {
-                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}`);
-              } else {
-                router.push('/tickets');
-              }
-            }}
             style={{
               width: '100%',
-              padding: '14px',
-              fontSize: '1.05rem',
-              fontWeight: 800,
-              background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
-              borderColor: '#059669',
+              padding: '13px 20px',
+              fontSize: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
             }}
           >
-            🎫 {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+            <SearchIcon size={18} /> {t.home.planJourneyBtn}
           </button>
         </div>
       </section>
@@ -271,18 +251,18 @@ export default function Home() {
 
       {/* Popular Metro Networks Section */}
       <section className="card" style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--metro-navy)', margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span>🚆</span> Supported Metro Networks Across India
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--metro-navy)', margin: '0 0 16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <TrainIcon size={18} color="var(--metro-blue)" /> Supported Metro Transit Networks
         </h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
           {availableNetworks.map((net) => {
             const getNetworkColor = (name: string) => {
-              if (name === 'Delhi Metro') return '#0057B8';
-              if (name === 'Noida Metro') return '#00A8E8';
-              if (name === 'Mumbai Metro') return '#0066CC';
-              if (name.includes('Bengaluru')) return '#800080';
-              if (name === 'Hyderabad Metro') return '#DC241F';
-              if (name === 'Chennai Metro') return '#00AA00';
+              if (name === 'Delhi Metro') return '#1D4ED8';
+              if (name === 'Noida Metro') return '#0284C7';
+              if (name === 'Mumbai Metro') return '#2563EB';
+              if (name.includes('Bengaluru')) return '#7C3AED';
+              if (name === 'Hyderabad Metro') return '#DC2626';
+              if (name === 'Chennai Metro') return '#059669';
               return '#64748B';
             };
 
@@ -293,16 +273,15 @@ export default function Home() {
                 key={net.name}
                 style={{
                   backgroundColor: '#FFFFFF',
-                  border: `1px solid ${net.isAvailable ? networkColor : '#CBD5E1'}`,
-                  padding: '8px 16px',
-                  borderRadius: '20px',
-                  fontWeight: 700,
-                  fontSize: '0.88rem',
+                  border: `1px solid ${net.isAvailable ? '#CBD5E1' : '#E2E8F0'}`,
+                  padding: '6px 14px',
+                  borderRadius: '4px',
+                  fontWeight: 600,
+                  fontSize: '0.84rem',
                   color: net.isAvailable ? 'var(--metro-navy)' : '#94A3B8',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)',
                 }}
               >
                 <span
@@ -310,7 +289,7 @@ export default function Home() {
                     display: 'inline-block',
                     width: '8px',
                     height: '8px',
-                    borderRadius: '50%',
+                    borderRadius: '2px',
                     backgroundColor: networkColor,
                   }}
                 />
@@ -320,13 +299,13 @@ export default function Home() {
                     style={{
                       fontSize: '0.68rem',
                       padding: '1px 6px',
-                      borderRadius: '8px',
-                      backgroundColor: '#FEF3C7',
-                      color: '#92400E',
-                      fontWeight: 800,
+                      borderRadius: '3px',
+                      backgroundColor: '#F1F5F9',
+                      color: '#64748B',
+                      fontWeight: 600,
                     }}
                   >
-                    Coming Soon
+                    Phase 2
                   </span>
                 )}
               </span>

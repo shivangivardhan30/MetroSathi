@@ -7,6 +7,7 @@ import RouteDetails from '../components/RouteDetails';
 import LocationCard from '../components/LocationCard';
 import { availableCities, getAllStations, MetroStation, getStationById } from '../lib/metroData';
 import { calculateRoute, MetroRoute } from '../lib/routeCalculator';
+import { SearchIcon, TicketIcon, TrainIcon } from '../components/NavIcons';
 
 export default function Journey() {
   const router = useRouter();
@@ -113,6 +114,9 @@ export default function Journey() {
         <p style={{ color: 'var(--metro-text-muted)', fontSize: '1rem', marginTop: '6px' }}>
           {t.journey.description}
         </p>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 10px', background: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: '4px', fontSize: '0.8rem', color: '#1E40AF', marginTop: '4px', fontWeight: 600 }}>
+          <span>Destination SOS Alert Enabled: Automatic audio chime and vibration before your destination arrives.</span>
+        </div>
       </div>
 
       {/* 1. Location Finder Card */}
@@ -122,9 +126,9 @@ export default function Journey() {
       />
 
       {/* 2. Journey Planner Form */}
-      <section ref={manualFormRef} className="form-card" style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
-        <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: 'var(--metro-navy)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span>🚆</span> {language === 'en' ? 'Plan Inter-Network & City Metro Journey' : 'इंटर-नेटवर्क मेट्रो यात्रा योजनाकार'}
+      <section ref={manualFormRef} className="form-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px', borderTop: '3px solid var(--metro-blue)' }}>
+        <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--metro-navy)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <TrainIcon size={18} color="var(--metro-blue)" /> {language === 'en' ? 'Plan Inter-Network & City Metro Journey' : 'इंटर-नेटवर्क मेट्रो यात्रा योजनाकार'}
         </h3>
 
         {/* Source Station Selection */}
@@ -134,7 +138,7 @@ export default function Journey() {
           onChange={setSourceStation}
           placeholder={t.routeDetails.sourceStation}
           searchPlaceholder="Search source station e.g. Noida Sector 51, Rajiv Chowk..."
-          label={language === 'en' ? '🚉 Source Station' : '🚉 स्रोत स्टेशन'}
+          label={language === 'en' ? 'Source Station (Origin)' : 'स्रोत स्टेशन'}
         />
 
         {/* Destination Station Selection */}
@@ -144,56 +148,48 @@ export default function Journey() {
           onChange={setDestinationStation}
           placeholder={t.routeDetails.destinationStation}
           searchPlaceholder="Search destination station e.g. Lajpat Nagar, Pari Chowk..."
-          label={language === 'en' ? '🎯 Destination Station' : '🎯 गंतव्य स्टेशन'}
+          label={language === 'en' ? 'Destination Station' : 'गंतव्य स्टेशन'}
         />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '8px' }}>
-          <button className="button" onClick={handleShowRoute} style={{ width: '100%' }}>
-            🔍 {t.journey.showRoute}
-          </button>
+        <div style={{ marginTop: '10px' }}>
           <button
-            type="button"
             className="button"
-            onClick={() => {
-              if (sourceStation && destinationStation) {
-                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}&dest=${encodeURIComponent(destinationStation)}`);
-              } else if (sourceStation) {
-                router.push(`/tickets?src=${encodeURIComponent(sourceStation)}`);
-              } else {
-                router.push('/tickets');
-              }
-            }}
+            onClick={handleShowRoute}
             style={{
               width: '100%',
-              background: 'linear-gradient(135deg, #059669 0%, #10B981 100%)',
-              borderColor: '#059669',
+              padding: '13px 20px',
+              fontSize: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
             }}
           >
-            🎫 {language === 'en' ? 'Buy Metro Ticket' : 'मेट्रो टिकट खरीदें'}
+            <SearchIcon size={18} /> {t.journey.showRoute}
           </button>
         </div>
       </section>
 
       {/* 3. Visual Step Flow Banner */}
-      <section className="card" style={{ marginBottom: '32px', backgroundColor: 'var(--metro-navy)', color: '#ffffff' }}>
-        <h4 style={{ margin: '0 0 16px', fontSize: '0.9rem', color: 'var(--metro-cyan)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <section className="card" style={{ marginBottom: '24px', backgroundColor: '#0F172A', color: '#ffffff', border: '1px solid #334155' }}>
+        <h4 style={{ margin: '0 0 12px', fontSize: '0.82rem', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>
           {t.journey.stepTitle}
         </h4>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', fontSize: '0.88rem' }}>
-          <div style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px' }}>
-            📍 Location
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center', fontSize: '0.85rem' }}>
+          <div style={{ background: '#1E293B', padding: '6px 12px', borderRadius: '4px', border: '1px solid #334155' }}>
+            Location
           </div>
-          <span style={{ color: 'var(--metro-cyan)' }}>➔</span>
-          <div style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px' }}>
-            🚉 {sourceStationObj ? `${sourceStationObj.name} (${sourceStationObj.network})` : (language === 'en' ? 'Source' : 'स्रोत')}
+          <span style={{ color: '#64748B' }}>➔</span>
+          <div style={{ background: '#1E293B', padding: '6px 12px', borderRadius: '4px', border: '1px solid #334155' }}>
+            {sourceStationObj ? `${sourceStationObj.name} (${sourceStationObj.network})` : (language === 'en' ? 'Source' : 'स्रोत')}
           </div>
-          <span style={{ color: 'var(--metro-cyan)' }}>➔</span>
-          <div style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px' }}>
-            🎯 {destStationObj ? `${destStationObj.name} (${destStationObj.network})` : (language === 'en' ? 'Destination' : 'गंतव्य')}
+          <span style={{ color: '#64748B' }}>➔</span>
+          <div style={{ background: '#1E293B', padding: '6px 12px', borderRadius: '4px', border: '1px solid #334155' }}>
+            {destStationObj ? `${destStationObj.name} (${destStationObj.network})` : (language === 'en' ? 'Destination' : 'गंतव्य')}
           </div>
-          <span style={{ color: 'var(--metro-cyan)' }}>➔</span>
-          <div style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px' }}>
-            🚇 Platform & Gate
+          <span style={{ color: '#64748B' }}>➔</span>
+          <div style={{ background: '#1E293B', padding: '6px 12px', borderRadius: '4px', border: '1px solid #334155' }}>
+            Platform & Gate
           </div>
         </div>
       </section>

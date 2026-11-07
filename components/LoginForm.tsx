@@ -26,23 +26,23 @@ export default function LoginForm({ language, onLoginSuccess }: LoginFormProps) 
 
   const labels = {
     en: {
-      title: '🔐 Login to MetroSathi',
+      title: 'Passenger Sign In / Access',
       email: 'Email Address (Optional)',
       phone: 'Phone Number (Optional)',
-      placeholder_email: 'user@example.com',
+      placeholder_email: 'passenger@example.com',
       placeholder_phone: '+91 XXXXXXXXXX',
-      note: 'Enter email or phone number (at least one required)',
-      loginBtn: '🚀 Login',
+      note: 'Enter email or phone number to access saved travel routes',
+      loginBtn: 'Sign In',
       loginError: 'Error:',
     },
     hi: {
-      title: '🔐 मेट्रो साथी में लॉगिन करें',
+      title: 'यात्री साइन इन / पंजीकरण',
       email: 'ईमेल पता (वैकल्पिक)',
       phone: 'फोन नंबर (वैकल्पिक)',
-      placeholder_email: 'user@example.com',
+      placeholder_email: 'passenger@example.com',
       placeholder_phone: '+91 XXXXXXXXXX',
-      note: 'ईमेल या फोन नंबर दर्ज करें (कम से कम एक आवश्यक)',
-      loginBtn: '🚀 लॉगिन करें',
+      note: 'सहेजे गए मार्गों के लिए ईमेल या फोन नंबर दर्ज करें',
+      loginBtn: 'साइन इन करें',
       loginError: 'त्रुटि:',
     },
   };
@@ -52,36 +52,37 @@ export default function LoginForm({ language, onLoginSuccess }: LoginFormProps) 
   return (
     <div
       style={{
-        background: 'rgba(255, 255, 255, 0.95)',
-        borderRadius: '16px',
-        padding: '32px',
+        background: '#FFFFFF',
+        borderRadius: '6px',
+        padding: '28px',
         maxWidth: '420px',
         margin: '0 auto',
-        border: '1px solid rgba(0, 87, 184, 0.15)',
-        boxShadow: '0 12px 32px rgba(11, 31, 58, 0.08)',
+        border: '1px solid var(--metro-card-border)',
+        borderTop: '3px solid var(--metro-blue)',
       }}
     >
       <h2
         style={{
           textAlign: 'center',
-          color: '#0B1F3A',
+          color: 'var(--metro-navy)',
           marginTop: 0,
-          marginBottom: '24px',
+          marginBottom: '20px',
           fontWeight: '700',
+          fontSize: '1.2rem',
         }}
       >
         {t.title}
       </h2>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <div>
           <label
             style={{
               display: 'block',
-              marginBottom: '8px',
+              marginBottom: '6px',
               fontWeight: '600',
-              color: '#0B1F3A',
-              fontSize: '0.95rem',
+              color: 'var(--metro-navy)',
+              fontSize: '0.88rem',
             }}
           >
             {t.email}
@@ -93,13 +94,13 @@ export default function LoginForm({ language, onLoginSuccess }: LoginFormProps) 
             onChange={e => setEmail(e.target.value)}
             style={{
               width: '100%',
-              padding: '12px 16px',
-              border: '1px solid #CBD5E1',
-              borderRadius: '10px',
-              fontSize: '1rem',
+              padding: '10px 14px',
+              border: '1px solid var(--metro-card-border)',
+              borderRadius: '4px',
+              fontSize: '0.92rem',
               boxSizing: 'border-box',
-              background: '#F8FAFC',
-              color: '#0F172A',
+              background: '#FFFFFF',
+              color: 'var(--metro-text-main)',
             }}
           />
         </div>
@@ -108,10 +109,10 @@ export default function LoginForm({ language, onLoginSuccess }: LoginFormProps) 
           <label
             style={{
               display: 'block',
-              marginBottom: '8px',
+              marginBottom: '6px',
               fontWeight: '600',
-              color: '#0B1F3A',
-              fontSize: '0.95rem',
+              color: 'var(--metro-navy)',
+              fontSize: '0.88rem',
             }}
           >
             {t.phone}
@@ -123,36 +124,35 @@ export default function LoginForm({ language, onLoginSuccess }: LoginFormProps) 
             onChange={e => setPhone(e.target.value)}
             style={{
               width: '100%',
-              padding: '12px 16px',
-              border: '1px solid #CBD5E1',
-              borderRadius: '10px',
-              fontSize: '1rem',
+              padding: '10px 14px',
+              border: '1px solid var(--metro-card-border)',
+              borderRadius: '4px',
+              fontSize: '0.92rem',
               boxSizing: 'border-box',
-              background: '#F8FAFC',
-              color: '#0F172A',
+              background: '#FFFFFF',
+              color: 'var(--metro-text-main)',
             }}
           />
         </div>
 
         <p
           style={{
-            fontSize: '0.85rem',
-            color: '#64748B',
-            fontStyle: 'italic',
-            margin: '4px 0',
+            fontSize: '0.8rem',
+            color: 'var(--metro-text-subtle)',
+            margin: '2px 0',
           }}
         >
-          📝 {t.note}
+          {t.note}
         </p>
 
         {error && (
           <div
             style={{
-              padding: '12px',
+              padding: '10px 14px',
               background: '#FEF2F2',
-              borderRadius: '8px',
+              borderRadius: '4px',
               color: '#DC2626',
-              fontSize: '0.9rem',
+              fontSize: '0.85rem',
               borderLeft: '4px solid #DC2626',
             }}
           >
@@ -165,13 +165,13 @@ export default function LoginForm({ language, onLoginSuccess }: LoginFormProps) 
           disabled={isLoading}
           className="button"
           style={{
-            marginTop: '12px',
+            marginTop: '8px',
             opacity: isLoading ? 0.6 : 1,
             cursor: isLoading ? 'not-allowed' : 'pointer',
             width: '100%',
           }}
         >
-          {isLoading ? '⏳ Logging in...' : t.loginBtn}
+          {isLoading ? 'Signing In...' : t.loginBtn}
         </button>
       </form>
     </div>

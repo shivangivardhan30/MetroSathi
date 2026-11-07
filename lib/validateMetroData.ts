@@ -71,9 +71,9 @@ export function validateMetroData(): { errors: string[]; warnings: string[] } {
   });
 
   if (typeof window !== 'undefined') {
-    console.group('🚇 [MetroSathi Data Validation Report]');
+    console.group('[MetroSathi Data Validation Report]');
     if (errors.length === 0 && warnings.length === 0) {
-      console.log('✓ All metro networks & station graphs are valid and contiguous!');
+      console.log('All metro networks & station graphs are valid and contiguous.');
     } else {
       if (errors.length > 0) console.error(`Found ${errors.length} Data Error(s):`, errors);
       if (warnings.length > 0) console.warn(`Found ${warnings.length} Data Warning(s):`, warnings);

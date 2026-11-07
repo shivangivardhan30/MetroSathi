@@ -25,8 +25,8 @@ export default function Assistant() {
   // Initialize initial greeting and react to language changes
   useEffect(() => {
     const greetingText = language === 'en'
-      ? "Hello! I am MetroMate, your AI travel assistant. Ask me questions about metro routes, platforms, exit gates, or ticketing across India!"
-      : "नमस्ते! मैं मेट्रो साथी हूँ, आपका AI यात्रा सहायक। भारत के किसी भी मेट्रो मार्ग, प्लेटफॉर्म, निकास द्वार या टिकट के बारे में मुझसे पूछें!";
+      ? "Welcome to the Passenger Help & Transit Information Desk. How can we assist you with routes, interchange stations, platforms, or exit gates today?"
+      : "यात्री सहायता एवं पारगमन सूचना केंद्र में आपका स्वागत है। आज हम आपको मार्ग, इंटरचेंज स्टेशन, प्लेटफॉर्म या निकास द्वार के बारे में क्या जानकारी दे सकते हैं?";
 
     setMessages([
       {
@@ -146,10 +146,10 @@ export default function Assistant() {
     }
 
     // Case 4: Ticket enquiries
-    if (textLower.includes('ticket') || textLower.includes('book') || textLower.includes('fare') || textLower.includes('किराया') || textLower.includes('टिकट') || textLower.includes('बुक')) {
+    if (textLower.includes('ticket') || textLower.includes('book') || textLower.includes('fare') || textLower.includes('किराया') || textLower.includes('टिकट') || textLower.includes('बुक') || textLower.includes('lane') || textLower.includes('लेना')) {
       const response = language === 'en'
-        ? "You can easily book a single journey QR ticket directly through our Journey Planner page. Fares are calculated dynamically based on the number of stations you travel."
-        : "आप हमारे यात्रा योजनाकार (Journey Planner) पेज के माध्यम से सीधे सिंगल जर्नी क्यूआर टिकट बुक कर सकते हैं। आप जितने स्टेशनों की यात्रा करते हैं, उसके आधार पर किरायों की गणना की जाती है।";
+        ? "You can easily book digital QR tickets by navigating to the 'Tickets' section (/tickets) or clicking 'Buy Metro Ticket' after searching your route. We support single/group tickets with instant QR generation and simulated UPI/Card payment."
+        : "आप नेविगेशन बार में 'Tickets' (/tickets) पेज पर जाकर या अपनी यात्रा सर्च करके 'मेट्रो टिकट खरीदें' पर क्लिक करके आसानी से डिजिटल क्यूआर टिकट प्राप्त कर सकते हैं। इसमें UPI, कार्ड और नेट बैंकिंग द्वारा तत्काल QR कोड टिकट मिलता है।";
       return { text: response };
     }
 
@@ -194,14 +194,14 @@ export default function Assistant() {
   };
 
   return (
-    <main className="container" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 80px)', maxWidth: '840px', padding: '24px 16px 0 16px' }}>
+    <main className="container" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 100px)', maxWidth: '860px', padding: '20px 16px 0 16px' }}>
       {/* Page Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
         <div>
-          <h1 style={{ color: '#0B1F3A', margin: 0, fontSize: '1.8rem', fontWeight: '800' }}>
+          <h1 style={{ color: 'var(--metro-navy)', margin: 0, fontSize: '1.45rem', fontWeight: 700 }}>
             {t.assistant.title}
           </h1>
-          <p style={{ color: '#64748B', fontSize: '0.95rem', margin: '4px 0 0' }}>{t.assistant.description}</p>
+          <p style={{ color: '#64748B', fontSize: '0.88rem', margin: '4px 0 0' }}>{t.assistant.description}</p>
         </div>
       </div>
 
@@ -210,15 +210,14 @@ export default function Assistant() {
         style={{
           flex: 1,
           background: '#FFFFFF',
-          borderRadius: '24px',
+          borderRadius: '6px',
           padding: '20px',
-          boxShadow: '0 12px 32px rgba(11, 31, 58, 0.08), 0 0 1px rgba(0,0,0,0.1)',
-          border: '1px solid rgba(0, 87, 184, 0.12)',
+          border: '1px solid var(--metro-card-border)',
           overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px',
-          marginBottom: '20px',
+          gap: '14px',
+          marginBottom: '16px',
         }}
       >
         {messages.map((msg) => (
@@ -228,29 +227,25 @@ export default function Assistant() {
               display: 'flex',
               justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start',
               width: '100%',
-              animation: 'fadeIn 0.25s ease',
             }}
           >
             <div
               style={{
                 maxWidth: '85%',
                 background: msg.sender === 'user' 
-                  ? 'linear-gradient(135deg, #0B1F3A 0%, #0057B8 100%)' 
+                  ? 'var(--metro-blue)' 
                   : '#F8FAFC',
-                color: msg.sender === 'user' ? 'white' : '#0F172A',
-                borderRadius: msg.sender === 'user' 
-                  ? '20px 20px 4px 20px' 
-                  : '20px 20px 20px 4px',
-                padding: '14px 18px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                border: msg.sender === 'user' ? 'none' : '1px solid #E2E8F0',
+                color: msg.sender === 'user' ? '#FFFFFF' : '#0F172A',
+                borderRadius: '6px',
+                padding: '12px 16px',
+                border: msg.sender === 'user' ? '1px solid #1E40AF' : '1px solid var(--metro-card-border)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '12px',
+                gap: '10px',
               }}
             >
               {/* Message text */}
-              <div style={{ fontSize: '0.98rem', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
+              <div style={{ fontSize: '0.92rem', lineHeight: '1.55', whiteSpace: 'pre-wrap' }}>
                 {msg.text}
               </div>
 
@@ -262,7 +257,7 @@ export default function Assistant() {
               )}
 
               {/* Timestamp */}
-              <div style={{ fontSize: '0.75rem', alignSelf: 'flex-end', color: msg.sender === 'user' ? 'rgba(255,255,255,0.7)' : '#94a3b8' }}>
+              <div style={{ fontSize: '0.72rem', alignSelf: 'flex-end', color: msg.sender === 'user' ? 'rgba(255,255,255,0.75)' : '#94A3B8' }}>
                 {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </div>
             </div>
@@ -271,10 +266,8 @@ export default function Assistant() {
 
         {isTyping && (
           <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <div style={{ background: 'rgba(255,255,255,0.8)', padding: '14px 20px', borderRadius: '20px', color: '#888', display: 'flex', gap: '4px', border: '1px solid rgba(102,126,234,0.1)' }}>
-              <div style={{ animation: 'bounce 0.8s infinite', animationDelay: '0s' }}>●</div>
-              <div style={{ animation: 'bounce 0.8s infinite', animationDelay: '0.2s' }}>●</div>
-              <div style={{ animation: 'bounce 0.8s infinite', animationDelay: '0.4s' }}>●</div>
+            <div style={{ background: '#F8FAFC', padding: '10px 16px', borderRadius: '4px', color: '#64748B', fontSize: '0.85rem', border: '1px solid #CBD5E1' }}>
+              Fetching transit information...
             </div>
           </div>
         )}
@@ -286,35 +279,35 @@ export default function Assistant() {
         <section
           style={{
             background: 'white',
-            borderRadius: '16px',
-            padding: '16px',
-            border: '1px solid rgba(0, 87, 184, 0.12)',
-            marginBottom: '16px',
+            borderRadius: '6px',
+            padding: '14px',
+            border: '1px solid var(--metro-card-border)',
+            marginBottom: '14px',
           }}
         >
-          <div style={{ fontWeight: '700', color: '#0B1F3A', fontSize: '0.9rem', marginBottom: '10px' }}>
-            💡 {t.assistant.sampleQuestionsTitle}
+          <div style={{ fontWeight: '700', color: '#0B1F3A', fontSize: '0.85rem', marginBottom: '8px' }}>
+            {t.assistant.sampleQuestionsTitle}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {cannedQuestions.map((faq) => (
               <button
                 key={faq.question}
                 onClick={() => handleAsk(faq.question)}
                 style={{
                   background: '#F8FAFC',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
+                  border: '1px solid var(--metro-card-border)',
+                  borderRadius: '4px',
+                  padding: '8px 12px',
                   textAlign: 'left',
-                  fontSize: '0.9rem',
+                  fontSize: '0.85rem',
                   color: '#334155',
                   cursor: 'pointer',
-                  transition: 'all 0.2s',
+                  transition: 'all 0.15s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#0057B8')}
-                onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#E2E8F0')}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--metro-blue)', e.currentTarget.style.color = 'var(--metro-blue)')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--metro-card-border)', e.currentTarget.style.color = '#334155')}
               >
-                ❓ {faq.question}
+                {faq.question}
               </button>
             ))}
           </div>
@@ -322,7 +315,7 @@ export default function Assistant() {
       )}
 
       {/* Input Form */}
-      <div style={{ display: 'flex', gap: '10px', paddingBottom: '24px' }}>
+      <div style={{ display: 'flex', gap: '8px', paddingBottom: '20px' }}>
         <input
           type="text"
           value={query}
@@ -333,13 +326,12 @@ export default function Assistant() {
           }}
           style={{
             flex: 1,
-            border: '1px solid #CBD5E1',
-            borderRadius: '16px',
-            padding: '14px 20px',
-            fontSize: '1rem',
+            border: '1px solid var(--metro-card-border)',
+            borderRadius: '4px',
+            padding: '10px 14px',
+            fontSize: '0.92rem',
             background: 'white',
             outline: 'none',
-            boxShadow: '0 4px 12px rgba(11, 31, 58, 0.04)',
           }}
         />
         <button
@@ -347,12 +339,12 @@ export default function Assistant() {
           className="button"
           style={{
             margin: 0,
-            borderRadius: '16px',
-            padding: '14px 24px',
-            fontWeight: 'bold',
+            borderRadius: '4px',
+            padding: '10px 20px',
+            fontWeight: 600,
           }}
         >
-          🚀 Send
+          Send Enquiry
         </button>
       </div>
     </main>

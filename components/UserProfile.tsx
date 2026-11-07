@@ -14,30 +14,31 @@ export default function UserProfile({ language, onLogout }: UserProfileProps) {
 
   const labels = {
     en: {
-      profile: '👤 User Profile',
+      profile: 'Passenger Profile & Travel Records',
       email: 'Email:',
       phone: 'Phone:',
       name: 'Name:',
       favorites: 'Saved Stations:',
       recentJourneys: 'Recent Journeys:',
-      logoutBtn: '🚪 Logout',
+      logoutBtn: 'Sign Out',
       noFavorites: 'No saved stations yet',
       noRecent: 'No recent journeys yet',
-      myTickets: '🎫 My Booked Tickets',
-      noTickets: 'No booked tickets yet.',
+      myTickets: 'Issued Transit Passes',
+      noTickets: 'No booked tickets recorded in this session.',
     },
     hi: {
-      profile: '👤 उपयोगकर्ता प्रोफाइल',
+      title: 'यात्री प्रोफाइल एवं यात्रा विवरण',
+      profile: 'यात्री प्रोफाइल',
       email: 'ईमेल:',
       phone: 'फोन:',
       name: 'नाम:',
       favorites: 'सहेजे गए स्टेशन:',
       recentJourneys: 'हाल की यात्राएं:',
-      logoutBtn: '🚪 लॉगआउट करें',
+      logoutBtn: 'साइन आउट करें',
       noFavorites: 'अभी कोई सहेजा हुआ स्टेशन नहीं',
       noRecent: 'अभी कोई हाल की यात्रा नहीं',
-      myTickets: '🎫 मेरे बुक किए गए टिकट',
-      noTickets: 'अभी तक कोई बुक किया हुआ टिकट नहीं है।',
+      myTickets: 'जारी किए गए पारगमन पास',
+      noTickets: 'इस सत्र में कोई बुक किया हुआ टिकट नहीं है।',
     },
   };
 
@@ -52,61 +53,59 @@ export default function UserProfile({ language, onLogout }: UserProfileProps) {
     <div
       style={{
         background: '#FFFFFF',
-        borderRadius: '16px',
+        borderRadius: '6px',
         padding: '24px',
-        border: '1px solid rgba(0, 87, 184, 0.15)',
-        boxShadow: '0 8px 24px rgba(11, 31, 58, 0.06)',
+        border: '1px solid var(--metro-card-border)',
+        borderTop: '3px solid var(--metro-blue)',
         marginBottom: '24px',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <h3 style={{ margin: 0, color: '#0B1F3A', fontWeight: '700' }}>{t.profile}</h3>
+        <h3 style={{ margin: 0, color: 'var(--metro-navy)', fontWeight: 700, fontSize: '1.15rem' }}>{t.profile}</h3>
         <button
           onClick={handleLogout}
-          className="button"
+          className="btn-outline"
           style={{
-            padding: '8px 16px',
-            fontSize: '0.85rem',
-            background: '#FEF2F2',
+            padding: '6px 14px',
+            fontSize: '0.82rem',
             color: '#DC2626',
-            border: '1px solid #FCA5A5',
+            borderColor: '#FCA5A5',
           }}
         >
           {t.logoutBtn}
         </button>
       </div>
 
-      <div style={{ display: 'grid', gap: '14px', color: '#334155' }}>
+      <div style={{ display: 'grid', gap: '12px', color: '#334155', fontSize: '0.9rem' }}>
         {user.name && (
           <div>
-            <strong style={{ color: '#0B1F3A' }}>{t.name}</strong> {user.name}
+            <strong style={{ color: 'var(--metro-navy)' }}>{t.name}</strong> {user.name}
           </div>
         )}
         {user.email && (
           <div>
-            <strong style={{ color: '#0B1F3A' }}>{t.email}</strong> {user.email}
+            <strong style={{ color: 'var(--metro-navy)' }}>{t.email}</strong> {user.email}
           </div>
         )}
         {user.phone && (
           <div>
-            <strong style={{ color: '#0B1F3A' }}>{t.phone}</strong> {user.phone}
+            <strong style={{ color: 'var(--metro-navy)' }}>{t.phone}</strong> {user.phone}
           </div>
         )}
 
         {/* Booked Tickets Section */}
-        <div style={{ paddingTop: '14px', borderTop: '1px solid #E2E8F0' }}>
+        <div style={{ paddingTop: '12px', borderTop: '1px solid var(--metro-card-border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <strong style={{ color: '#0B1F3A' }}>{t.myTickets}</strong>
-            <span style={{ fontSize: '0.7rem', padding: '2px 8px', background: '#FEF3C7', color: '#92400E', borderRadius: '12px', fontWeight: '600' }}>
-              ⚠️ Simulated Demo Tickets
+            <strong style={{ color: 'var(--metro-navy)' }}>{t.myTickets}</strong>
+            <span style={{ fontSize: '0.7rem', padding: '2px 8px', background: '#F1F5F9', color: '#475569', borderRadius: '4px', fontWeight: 600 }}>
+              Session Passes
             </span>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {user.bookedTickets && user.bookedTickets.length > 0 ? (
               user.bookedTickets.map((ticket) => {
                 const isExpanded = expandedTicketId === ticket.id;
 
-                // Mock dynamic QR matrix path
                 const generateQrPath = () => {
                   let path = '';
                   const size = 10;
@@ -131,25 +130,24 @@ export default function UserProfile({ language, onLogout }: UserProfileProps) {
                     key={ticket.id}
                     style={{
                       background: '#F8FAFC',
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '10px',
-                      padding: '14px',
+                      border: '1px solid var(--metro-card-border)',
+                      borderRadius: '4px',
+                      padding: '12px',
                       cursor: 'pointer',
-                      transition: 'all 0.2s',
                     }}
                     onClick={() => setExpandedTicketId(isExpanded ? null : ticket.id)}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <span style={{ fontWeight: '700', color: '#0B1F3A', fontSize: '0.95rem' }}>
+                        <span style={{ fontWeight: 600, color: 'var(--metro-navy)', fontSize: '0.9rem' }}>
                           {ticket.sourceStationName} ➔ {ticket.destinationStationName}
                         </span>
-                        <div style={{ fontSize: '0.8rem', color: '#64748B', marginTop: '4px' }}>
+                        <div style={{ fontSize: '0.78rem', color: '#64748B', marginTop: '2px' }}>
                           {ticket.ticketType} • {ticket.passengers} Pax • ₹{ticket.fare}
                         </div>
                       </div>
-                      <span style={{ fontSize: '0.8rem', color: '#0057B8', fontWeight: '600' }}>
-                        {isExpanded ? '▲ Hide QR' : '▼ View QR'}
+                      <span style={{ fontSize: '0.8rem', color: 'var(--metro-blue)', fontWeight: 600 }}>
+                        {isExpanded ? 'Hide Pass' : 'View Pass'}
                       </span>
                     </div>
 
@@ -159,20 +157,20 @@ export default function UserProfile({ language, onLogout }: UserProfileProps) {
                           display: 'flex',
                           flexDirection: 'column',
                           alignItems: 'center',
-                          marginTop: '12px',
-                          paddingTop: '12px',
+                          marginTop: '10px',
+                          paddingTop: '10px',
                           borderTop: '1px dashed #CBD5E1',
                         }}
-                        onClick={(e) => e.stopPropagation()} // prevent card close click bubbling
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <svg width="80" height="80" viewBox="0 0 60 60" style={{ fill: '#0B1F3A' }}>
+                        <svg width="80" height="80" viewBox="0 0 60 60" style={{ fill: '#0F172A' }}>
                           <path d={generateQrPath()} />
                         </svg>
-                        <span style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '8px', fontFamily: 'monospace' }}>
+                        <span style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '6px', fontFamily: 'monospace' }}>
                           ID: {ticket.id}
                         </span>
-                        <span style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '2px' }}>
-                          Booked: {new Date(ticket.timestamp).toLocaleString()}
+                        <span style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '2px' }}>
+                          Issued: {new Date(ticket.timestamp).toLocaleString()}
                         </span>
                       </div>
                     )}
@@ -180,16 +178,16 @@ export default function UserProfile({ language, onLogout }: UserProfileProps) {
                 );
               })
             ) : (
-              <div style={{ fontSize: '0.9rem', color: '#94A3B8', padding: '8px 0' }}>
+              <div style={{ fontSize: '0.86rem', color: '#94A3B8', padding: '6px 0' }}>
                 {t.noTickets}
               </div>
             )}
           </div>
         </div>
 
-        <div style={{ paddingTop: '12px', borderTop: '1px solid #E2E8F0' }}>
-          <strong style={{ color: '#0B1F3A' }}>{t.favorites}</strong>
-          <div style={{ marginTop: '6px', fontSize: '0.9rem', color: '#64748B' }}>
+        <div style={{ paddingTop: '10px', borderTop: '1px solid var(--metro-card-border)' }}>
+          <strong style={{ color: 'var(--metro-navy)' }}>{t.favorites}</strong>
+          <div style={{ marginTop: '4px', fontSize: '0.86rem', color: '#64748B' }}>
             {user.favorites.length > 0 ? (
               <div>{user.favorites.length} station(s) saved</div>
             ) : (
@@ -199,8 +197,8 @@ export default function UserProfile({ language, onLogout }: UserProfileProps) {
         </div>
 
         <div>
-          <strong style={{ color: '#0B1F3A' }}>{t.recentJourneys}</strong>
-          <div style={{ marginTop: '6px', fontSize: '0.9rem', color: '#64748B' }}>
+          <strong style={{ color: 'var(--metro-navy)' }}>{t.recentJourneys}</strong>
+          <div style={{ marginTop: '4px', fontSize: '0.86rem', color: '#64748B' }}>
             {user.recentJourneys.length > 0 ? (
               <div>{user.recentJourneys.length} journey(s) recorded</div>
             ) : (

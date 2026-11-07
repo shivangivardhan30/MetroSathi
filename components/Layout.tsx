@@ -19,10 +19,10 @@ export default function Layout({ children }: LayoutProps) {
 
   const navItems = [
     { href: '/', label: language === 'en' ? 'Home' : 'मुख्य', icon: <HomeIcon size={18} /> },
-    { href: '/journey', label: language === 'en' ? 'Plan Journey' : 'यात्रा योजनाकार', icon: <JourneyIcon size={18} /> },
+    { href: '/journey', label: language === 'en' ? 'Plan Journey' : 'यात्रा योजना', icon: <JourneyIcon size={18} /> },
     { href: '/tickets', label: language === 'en' ? 'Tickets' : 'टिकट', icon: <TicketIcon size={18} /> },
-    { href: '/map', label: language === 'en' ? 'Metro Networks' : 'मेट्रो नेटवर्क', icon: <MapIcon size={18} /> },
-    { href: '/assistant', label: language === 'en' ? 'AI Assistant' : 'AI सहायक', icon: <AssistantIcon size={18} /> },
+    { href: '/map', label: language === 'en' ? 'Network Map' : 'नेटवर्क मानचित्र', icon: <MapIcon size={18} /> },
+    { href: '/assistant', label: language === 'en' ? 'Travel Assistant' : 'यात्रा सहायक', icon: <AssistantIcon size={18} /> },
   ];
 
   const handleLanguageChange = (lang: 'en' | 'hi') => {
@@ -31,6 +31,14 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--metro-light-bg)' }}>
+      {/* Official Transit Information Strip */}
+      <div className="gov-top-bar">
+        <div className="gov-top-container">
+          <span>{language === 'en' ? 'National Capital Region & Connected Metro Transit Portal' : 'राष्ट्रीय राजधानी क्षेत्र एवं एकीकृत मेट्रो पारगमन पोर्टल'}</span>
+          <span>{language === 'en' ? 'Passenger Information & Navigation System' : 'यात्री सूचना एवं नेविगेशन प्रणाली'}</span>
+        </div>
+      </div>
+
       {/* Global Metro Navbar */}
       <header className="global-header">
         <div className="header-container">
